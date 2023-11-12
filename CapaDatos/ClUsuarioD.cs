@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using System.Data.SqlClient;
 using System.Data;
+using static CapaEntidad.ClDatos;
 
 namespace CapaDatos
 {
@@ -14,8 +15,9 @@ namespace CapaDatos
     {
         private ClConexion objConexion = new ClConexion();
 
-        public List<ClUsuarioE> MtdListar()
+        public List<ClUsuarioE> MtdListar(out string mensaje)
         {
+            mensaje = string.Empty;
             List<ClUsuarioE> lista = new List<ClUsuarioE>();
 
             try
@@ -24,42 +26,64 @@ namespace CapaDatos
                 {
                     SqlCommand cmd = new SqlCommand("SP_ListarUsuario", conexion);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    //cmd.Parameters.AddWithValue("@tablaSelecionada", tabla);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            lista.Add(new ClUsuarioE()
+                            ClUsuarioE usuario = new ClUsuarioE()
                             {
                                 idUsuario = Convert.ToInt32(reader["idUsuario"]),
                                 documentoUsuario = reader["documento"].ToString(),
                                 nombreUsuario = reader["nombre"].ToString(),
                                 apellidoUsuario = reader["apellido"].ToString(),
+                                tellUsuario = reader["tell"].ToString(),
                                 correoUsuario = reader["correo"].ToString(),
                                 claveUsuario = reader["clave"].ToString(),
+                                direccionUsuario = reader["direccion"].ToString(),
                                 estadoUsuario = Convert.ToBoolean(reader["estado"]),
-                                fechaRegistroUsuario = reader["fechaRegistro"].ToString(),
+                                fechaUsuario = reader["fechaUsuario"].ToString()
+                            };
+
+                            // Acceder a las dependencias
+                            usuario.objRol = new ClRolE
+                            {
+                                idRol = Convert.ToInt32(reader["idRol"]),
                                 nombreRol = reader["nombreRol"].ToString()
-                            }
-                            );
+                            };
+
+                            usuario.objCiudad = new ClCiudadE
+                            {
+                                idCiudad = Convert.ToInt32(reader["idCiudad"]),
+                                nombreCiudad = reader["nombreCiudad"].ToString()
+                            };
+
+                            usuario.objCiudad.objDepartamento = new ClDepartamentoE
+                            {
+                                idDepartamento = Convert.ToInt32(reader["idDepartamento"]),
+                                nombreDepartamento = reader["nombreDepartamento"].ToString()
+                            };
+
+                            lista.Add(usuario);
                         }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                mensaje = ex.ToString();
             }
-
-            objConexion.MtdCerrarConex();
+            finally
+            {
+                objConexion.MtdCerrarConex();
+            }
 
             return lista;
         }
+    }
 
 
-        public int MtdGuardar(ClUsuarioE objUsuarioE)
+    public int MtdGuardar(ClUsuarioE objUsuarioE)
         {
             int result = 0;
 

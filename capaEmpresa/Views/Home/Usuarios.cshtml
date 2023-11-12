@@ -25,6 +25,7 @@
                     <th>Documento</th>
                     <th>Nombres</th>
                     <th>Apellidos</th>
+                    <th>tell</th>
                     <th>Correo</th>
                     <th>Tipo Usuario</th>
                     <th>Estado</th>
@@ -56,29 +57,42 @@
                             <label for="text" class="form-label">Nombres:</label>
                             <input type="text" class="form-control" id="txtNombre" placeholder="Digite el nombre" name="txtNombre">
                         </div>
-                    </div>
-                    <div class="col">
                         <div class="mb-3">
                             <label for="text" class="form-label">Apellidos:</label>
                             <input type="text" class="form-control" id="txtApellido" placeholder="Digite los apellidos" name="txtApellido">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Correo:</label>
-                            <input type="email" class="form-control" id="txtCorreo" placeholder="Digite el correo" name="txtCorreo">
+                            <label for="text" class="form-label">Telefono:</label>
+                            <input type="text" class="form-control" id="txtTell" placeholder="Digite los apellidos" name="txtTell">
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3">
+                            <label for="email" class="form-label">Correo:</label>
+                            <input type="email" class="form-control" id="txtCorreo" placeholder="Digite el correo" name="txtCorreo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Direccion:</label>
+                            <input type="text" class="form-control" id="txtDireccion" placeholder="Digite el correo" name="txtDireccion">
+                        </div>
+                        <div class="mb-3">
                             <label for="text" class="form-label">Estado:</label>
                             <select id="btsEstado" class="form-select" aria-label="Default select example">
                                 <option disabled>Seleccione una opcion</option>
-                                <option value="Activo">Activo</option>
-                                <option value="No activo">No activo</option>
+                                <option value="0">Activo</option>
+                                <option value="1">No activo</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="text" class="form-label">Tipo Usuario:</label>
                             <select id="btsTipoUsuario" class="form-select" aria-label="Default select example">
+
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Ciudad:</label>
+                            <select id="btsCiudad" class="form-select" aria-label="Default select example">
+
                             </select>
                         </div>
                     </div>

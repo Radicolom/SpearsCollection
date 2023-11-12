@@ -20,21 +20,31 @@ namespace capaEmpresa.Controllers
             return View();
         }
 
+        [HttpGet]
         public JsonResult MtdListarUsuario()
         {
             List<ClUsuarioE> objLista = new List<ClUsuarioE>();
             objLista = new ClUsuarioL().MtdListar();
 
             return Json(new { data = objLista }, JsonRequestBehavior.AllowGet);
-            //return Json(objLista,JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public JsonResult MtdListarRol()
         {
             List<ClRolE> objLista = new List<ClRolE>();
             objLista = new ClRolL().MtdListar();
 
-            return Json(new { data = objLista}, JsonRequestBehavior.AllowGet);
+            return Json(new { data = objLista }, JsonRequestBehavior.AllowGet);
+        }
+        
+        [HttpGet]
+        public JsonResult MtdListarCiudad()
+        {
+            List<ClRolE> objLista = new List<ClRolE>();
+            objLista = new ClRolL().MtdListar();
+
+            return Json(new { data = objLista }, JsonRequestBehavior.AllowGet);
         }
         
     }

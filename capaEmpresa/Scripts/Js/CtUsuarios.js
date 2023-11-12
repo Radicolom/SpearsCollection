@@ -23,6 +23,24 @@
             }
         })
     }
+
+    function cargarAjaxPost(ruta, datos, tarea) {
+        $.ajax({
+            url: ruta,
+            type: "GET",
+            data: datos;
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+        }).done(function (data) {
+            if (tarea) {
+                tarea(data);
+            } else {
+                console.log("Error en la solicitud AJAX: ");
+                tarea([]);
+            }
+        })
+    }
+
     function cargarDatos() {
         cargarAjax('/Home/MtdListarUsuario', function (data) {
             console.log(data);
@@ -50,21 +68,21 @@
                     };
                     contar++;
 
-                    dataSet.push([contar, item.documentoUsuario, item.nombreUsuario, item.apellidoUsuario, item.correoUsuario, item.nombreRol,
+                    dataSet.push([contar, item.documentoUsuario, item.nombreUsuario, item.apellidoUsuario, item.tellUsuario, item.correoUsuario, item.nombreRol,
                         (item.estadoUsuario ? '<span class="badge text-bg-success"><i>Activo</i></span>' : '<span class="badge text-bg-warning"><i>No Activo</i></span>'),
                         objBotones.defaultContent
 
                     ]);
                 }
 
-                cargarTablaUsuarios(dataSet);
+                armarTablaUsuarios(dataSet);
             }
 
         });
 
     }
 
-    function cargarTablaUsuarios(dataSet) {
+    function armarTablaUsuarios(dataSet) {
         if (objTabla != null) {
             $("#tablaUsuarios").dataTable().fnDestroy();
         }
@@ -79,23 +97,50 @@
         })
     }
 
-    function abrirModal() {
-        $("#formModal").modal("show");
-        cargarAjax('/Home/MtdListarRol', function (data) {
-
-            const selectRol = $("#btsTipoUsuario");
-            selectRol.empty();
-            selectRol.append("<option disabled selected>Seleccione un puesto</option>");
-            data.forEach(function (item) {
-                selectRol.append("<option value=" + item.idRol + ">" + item.nombreRol + "</option>");
-            });
+    function listarCiudad() {
+        cargarAjax('/Home/MtdListarCiudad', function (data) {
+            if (lugar) {
+                const selectRol = $("#btsCiudad");
+                selectRol.empty();
+                selectRol.append("<option disabled selected value='0'>Seleccione una ciudad</option>");
+                data.forEach(function (item) {
+                    selectRol.append("<option value=" + item.idCiudad + ">" + item.nombreCiudad + "</option>");
+                });
+            }
         });
+    }
+
+    function listarRol(lugar) {
+        cargarAjax('/Home/MtdListarRol', function (data) {
+            if (lugar) {
+                const selectRol = $("#btsTipoUsuario");
+                selectRol.empty();
+                selectRol.append("<option disabled selected value='0'>Seleccione un puesto</option>");
+                data.forEach(function (item) {
+                    selectRol.append("<option value=" + item.idRol + ">" + item.nombreRol + "</option>");
+                });
+            }
+        });
+    }
+
+
+    function abrirModal() {
+
+        $("#formModal").modal("show");
+
+        listarRol(true);
+        listarCiudad(true);
 
         $("#txtDocumento").val("");
         $("#txtNombre").val("");
-        $("#txtApellido").val("");
-        $("#txtCorreo").val("");
-        $("#btsTipoUsuario").val("");
+        $("#txtApellido").val("")
+        $("#txtTell").val("")
+        $("#txtCorreo").val("")
+        $("#txtDireccion").val("")
+        $("#btsEstado").val("")
+        $("#btsTipoUsuario").val("")
+        $("#btsCiudad").val("")
+
     }
 
     function cerrarModal() {
@@ -103,6 +148,7 @@
         cargado = -1;
     }
 
+    //usuarios
     $("#btnRegistrar").on("click", function () {
         abrirModal();
 
@@ -110,7 +156,7 @@
     //Para editar
     $("#tablaUsuarios").on("click", "#btnEditar", function () {
         //Selecciona la fila
-        var filaSeleccionada = objTabla.row($(this).closest("tr")).index();
+        var filaSeleccionada = objTabla.row($(this).closest("tr"));
         //Selecciona los datos
         data = todosLosDatos[filaSeleccionada];
         console.log(data)
@@ -119,8 +165,12 @@
         $("#txtDocumento").val(data.documentoUsuario);
         $("#txtNombre").val(data.nombreUsuario);
         $("#txtApellido").val(data.apellidoUsuario);
+        $("#txtTell").val(data.tellUsuario);
         $("#txtCorreo").val(data.correoUsuario);
+        $("#txtDireccion").val(data.direccionUsuario);
+        $("#btsEstado").val(data.estadoUsuario ? "0" : "1");
         $("#btsTipoUsuario").val(data.idRol);
+        $("#btsCiudad").val(data.idCiudad);
 
         cargado = data.idUsuario;
     })
@@ -132,14 +182,22 @@
 
     $("#Guardar").on("click", function () {
         var registro = {
-            documentoUsuario:$("#txtDocumento").val(),
-            apellidoUsuario: $("#txtApellido").val(),
-            correoUsuario: dataFila.correoUsuario,
-            estadoUsuario: $("#btsTipoUsuario").val(),
-            idRol: $("#btsTipoUsuario").val(),
             idUsuario: cargado,
-            nombreUsuario: $("#txtNombre").val()
-        }
+            documentoUsuario: $("#txtDocumento").val(),
+            nombreUsuario: $("#txtNombre").val(),
+            apellidoUsuario: $("#txtApellido").val(),
+            tellUsuario: $("#txtTell").val(),
+            correoUsuario: $("#txtCorreo").val(),
+            direccionUsuario: $("#txtDireccion").val(),
+            estadoUsuario: (parseInt($("#btsEstado").val()) == 0),
+            objRol: {
+                idRol: $("#btsTipoUsuario").val()
+            },
+            objCiudad: {
+                idCiudad: $("#btsCiudad").val()
+            }
+        };
+
 
         if (registro.documentoUsuario == false) {
             alert("crear");

@@ -13,11 +13,20 @@ namespace CapaNegocio
         private ClUsuarioD objUsuario = new ClUsuarioD();
         public List<ClUsuarioE> MtdListar()
         {
-            return objUsuario.MtdListar();
+            string mensaje = string.Empty;
+            List<ClUsuarioE> lista = objUsuario.MtdListar(out mensaje);
+
+            if (!string.IsNullOrEmpty(mensaje))
+            {
+                ClRecursosL.MtdEnvioEmail("error", mensaje);
+            }
+
+            return lista;
         }
 
         public int MtdGuardar(ClUsuarioE objUsuarioE, out string mensaje)
         {
+            int result = 0;
             mensaje = string.Empty;
             if (string.IsNullOrEmpty(objUsuarioE.documentoUsuario) || string.IsNullOrWhiteSpace(objUsuarioE.documentoUsuario))
             {
@@ -33,7 +42,7 @@ namespace CapaNegocio
                 mensaje = "El apellido no pude ser vacio";
 
             }
-            else if (string.IsNullOrEmpty(objUsuarioE.correoUsuario) || string.IsNullOrWhiteSpace(objUsuarioE.documentoUsuario))
+            else if (string.IsNullOrEmpty(objUsuarioE.correoUsuario) || string.IsNullOrWhiteSpace(objUsuarioE.correoUsuario))
             {
                 mensaje = "El correo no pude ser vacio";
 
@@ -41,18 +50,22 @@ namespace CapaNegocio
 
             if (string.IsNullOrEmpty(mensaje))
             {
+                string pasword = string.Empty;
                 if (objUsuarioE.idUsuario == -1)
                 {
 
-                    objUsuarioE.claveUsuario = ClRecursosL.MtdEncrip(objUsuarioE.claveUsuario);
+                    objUsuarioE.claveUsuario = ClRecursosL.MtdEncrip(objUsuarioE.claveUsuario, out pasword);
 
                 }
-                return objUsuario.MtdGuardar(objUsuarioE);
+                result = objUsuario.MtdGuardar(objUsuarioE);
+                if (result == 1)
+                {
+                    ClRecursosL.MtdEnvioEmail(objUsuarioE.correoUsuario, pasword);
+                }
             }
-            else
-            {
-                return 0;
-            }
+             
+            return result;
+            
         }
 
         public int MtdEliminar(ClUsuarioE objUsuarioE)

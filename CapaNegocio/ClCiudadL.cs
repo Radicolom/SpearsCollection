@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CapaEntidad
+namespace CapaNegocio
 {
-    public class ClRolE
+    internal class ClCiudadL
     {
-        public int idRol { get; set; }
-        public string nombreRol { get; set; }
+
     }
 }
