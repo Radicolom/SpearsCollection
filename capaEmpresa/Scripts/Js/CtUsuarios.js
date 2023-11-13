@@ -2,11 +2,11 @@
 
     cargarDatos();
     ListarTablaUsuarios()
+    listarRol();
 
     var objTabla = null;
     var todosLosDatos = [];
-    var cargado = -1;
-    var dataFila = null;
+    var cargado = 0;
 
     function cargarAjax(ruta, tarea) {
         $.ajax({
@@ -21,24 +21,31 @@
                 console.log("Error en la solicitud AJAX: ");
                 tarea([]);
             }
-        })
+        }).always(function () {
+            $.LoadingOverlay("hide");
+        });
     }
 
     function cargarAjaxPost(ruta, datos, tarea) {
         $.ajax({
             url: ruta,
-            type: "GET",
-            data: datos;
+            type: "POST",
+            data: datos,
             dataType: "json",
             contentType: "application/json; charset=utf-8",
         }).done(function (data) {
             if (tarea) {
                 tarea(data);
             } else {
-                console.log("Error en la solicitud AJAX: ");
+                console.log("Error en la tarea AJAXPos: ");
                 tarea([]);
             }
-        })
+        }).fail(function (er) {
+            console.error(er);
+            error(er);
+        }).always(function () {
+            $.LoadingOverlay("hide");
+        });
     }
 
     function cargarDatos() {
@@ -68,7 +75,7 @@
                     };
                     contar++;
 
-                    dataSet.push([contar, item.documentoUsuario, item.nombreUsuario, item.apellidoUsuario, item.tellUsuario, item.correoUsuario, item.nombreRol,
+                    dataSet.push([contar, item.documentoUsuario, item.nombreUsuario, item.apellidoUsuario, item.tellUsuario, item.objRol.nombreRol,
                         (item.estadoUsuario ? '<span class="badge text-bg-success"><i>Activo</i></span>' : '<span class="badge text-bg-warning"><i>No Activo</i></span>'),
                         objBotones.defaultContent
 
@@ -97,39 +104,52 @@
         })
     }
 
-    function listarCiudad() {
+    function listarCiudad(lugar) {
         cargarAjax('/Home/MtdListarCiudad', function (data) {
-            if (lugar) {
-                const selectRol = $("#btsCiudad");
-                selectRol.empty();
-                selectRol.append("<option disabled selected value='0'>Seleccione una ciudad</option>");
-                data.forEach(function (item) {
-                    selectRol.append("<option value=" + item.idCiudad + ">" + item.nombreCiudad + "</option>");
-                });
+            switch (lugar) {
+                case "modal":
+                    if (lugar) {
+                        const selectRol = $("#btsCiudad");
+                        selectRol.empty();
+                        selectRol.append("<option disabled selected value='0'>Seleccione una ciudad</option>");
+                        data.forEach(function (item) {
+                            selectRol.append("<option value=" + item.idCiudad + ">" + item.nombreCiudad + "</option>");
+                        });
+                    }
+                    break;
             }
         });
     }
 
     function listarRol(lugar) {
         cargarAjax('/Home/MtdListarRol', function (data) {
-            if (lugar) {
-                const selectRol = $("#btsTipoUsuario");
-                selectRol.empty();
-                selectRol.append("<option disabled selected value='0'>Seleccione un puesto</option>");
-                data.forEach(function (item) {
-                    selectRol.append("<option value=" + item.idRol + ">" + item.nombreRol + "</option>");
-                });
+            switch (lugar) {
+                case lugar:
+                    const listaRoles = $("#listaRoles");
+                    listaRoles.empty();
+                    data.forEach(function (item) {
+                        listaRoles.append("<li><a class='dropdown-item' data-id='" + item.idRol + "'>" + item.nombreRol + "</a></li>");
+                    });
+                case "modal":
+                    if (lugar) {
+                        const selectRol = $("#btsTipoUsuario");
+                        selectRol.empty();
+                        selectRol.append("<option disabled selected value='0'>Seleccione un puesto</option>");
+                        data.forEach(function (item) {
+                            selectRol.append("<option value=" + item.idRol + ">" + item.nombreRol + "</option>");
+                        });
+                    }
+                    break;
             }
         });
     }
-
 
     function abrirModal() {
 
         $("#formModal").modal("show");
 
-        listarRol(true);
-        listarCiudad(true);
+        listarRol("modal");
+        listarCiudad("modal");
 
         $("#txtDocumento").val("");
         $("#txtNombre").val("");
@@ -145,22 +165,59 @@
 
     function cerrarModal() {
         $("#formModal").modal("hide");
-        cargado = -1;
+        cargado = 0;
     }
+
+    function guardado() {
+        Swal.fire({
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false
+        });
+    }
+
+    function alerta(mensaje, tarea) {
+        Swal.fire({
+            title: "Advertencia",
+            text: `¿Estás seguro de que deseas ${mensaje}?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (tarea) {
+                    tarea();
+                }
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                error("Se canceló");
+            }
+        });
+    }
+
+    function error(mensaje) {
+        Swal.fire({
+            title: mensaje,
+            icon: "error",
+            timer: 1500,
+            showConfirmButton: false
+        });
+    }
+
 
     //usuarios
     $("#btnRegistrar").on("click", function () {
         abrirModal();
-
+        $(".modal-title").html('<i class="fas fa-user-plus"></i> Agregar Usuario');
     });
-    //Para editar
+
     $("#tablaUsuarios").on("click", "#btnEditar", function () {
-        //Selecciona la fila
-        var filaSeleccionada = objTabla.row($(this).closest("tr"));
-        //Selecciona los datos
-        data = todosLosDatos[filaSeleccionada];
-        console.log(data)
+        var fila = objTabla.row($(this).closest("tr")).index();
+        var data = todosLosDatos[fila];
+
         abrirModal();
+
+        $(".modal-title").html('<i class="fas fa-user"></i><i class="fas fa-pen fa-xs"></i> EditarUsuario');
 
         $("#txtDocumento").val(data.documentoUsuario);
         $("#txtNombre").val(data.nombreUsuario);
@@ -169,18 +226,39 @@
         $("#txtCorreo").val(data.correoUsuario);
         $("#txtDireccion").val(data.direccionUsuario);
         $("#btsEstado").val(data.estadoUsuario ? "0" : "1");
-        $("#btsTipoUsuario").val(data.idRol);
-        $("#btsCiudad").val(data.idCiudad);
-
+        $("#btsTipoUsuario").val(data.objRol.idRol.toString());
+        $("#btsCiudad").val(data.objCiudad.idCiudad.toString());
+        debugger;
         cargado = data.idUsuario;
-    })
+    });
+
+    $("#tablaUsuarios").on("click", "#btnEliminar", function () {
+        var indiceFila = objTabla.row($(this).closest("tr")).index();
+        var valorDeseado = todosLosDatos[indiceFila];
+        alerta("eliminar Usuario", function () {
+            var usuario = {
+                idUsuario: valorDeseado.idUsuario
+            }
+            const data = JSON.stringify({ objUsuario: usuario })
+            cargarAjaxPost("/Home/MtdEliminarUsuario", data, function (dato) {
+                if (dato.data == 1) {
+                    guardado();
+                    ListarTablaUsuarios();
+                } else {
+                    error(dato.mensaje);
+                }
+            });
+        });
+    });
 
     $("#CancelarModal").on("click", function () {
-        dataFila = null;
-        cargado = -1;
+        cargado = 0;
     })
 
     $("#Guardar").on("click", function () {
+
+        $(".modal-body").LoadingOverlay("show");
+
         var registro = {
             idUsuario: cargado,
             documentoUsuario: $("#txtDocumento").val(),
@@ -198,17 +276,68 @@
             }
         };
 
+        const datos = JSON.stringify({ objUsuario: registro });
 
-        if (registro.documentoUsuario == false) {
-            alert("crear");
-        } else {
-            alert("edi");
-        }
-
-        dataFila = null;
-        cerrarModal();
+        cargarAjaxPost("/Home/MtdGuardarUsuario", datos, function (dato) {
+            if (dato.data == 1) {
+                guardado();
+                ListarTablaUsuarios();
+                cerrarModal();
+            } else {
+                $("#alertaUsuario").text(dato.mensaje);
+                $("#alertaUsuario").show();
+            }
+            $(".modal-body").LoadingOverlay("hide");
+        });
     })
 
+    //Rol
+
+    $("#GuardarRol").on("click", function () {
+
+        $(".modal-body").LoadingOverlay("show");
+
+        var rol = {
+            nombreRol: $("#txtRol").val()
+        }
+
+        const objeto = JSON.stringify({ objRol: rol });
+
+        cargarAjaxPost("/Home/MtdGuardarRol", objeto, function (data) {
+            debugger
+            if (data.data == 1) {
+                $("#txtRol").val("");
+                guardado();
+                listarRol();
+                $("#MdRol").modal("hide");
+            } else {
+                error(data.mensaje);
+            }
+            $(".modal-body").LoadingOverlay("hide");
+        });
+
+    });
+    //eliminar rol
+    $("#listaRoles").on("click", ".dropdown-item", function () {
+        var rol = $(this).data("id");
+        var dato = {
+            idRol: rol
+        }
+
+        const datos = JSON.stringify({ objRol: dato });
+                
+        alerta("eliminar el Rol", function () {
+            cargarAjaxPost("/Home/MtdEliminarRol", datos, function (data) {
+                console.log(data);
+                if (data.data == 1) {
+                    guardado();
+                } else {
+                    error(data.mensaje);
+                }
+                listarRol();
+            }); 
+        });
+    });
 
 
 })

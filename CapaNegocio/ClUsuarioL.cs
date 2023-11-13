@@ -10,6 +10,7 @@ namespace CapaNegocio
 {
     public class ClUsuarioL
     {
+        private string emailY = "speearscollectionbbc@gmail.com";
         private ClUsuarioD objUsuario = new ClUsuarioD();
         public List<ClUsuarioE> MtdListar()
         {
@@ -18,7 +19,7 @@ namespace CapaNegocio
 
             if (!string.IsNullOrEmpty(mensaje))
             {
-                ClRecursosL.MtdEnvioEmail("error", mensaje);
+                ClRecursosL.MtdEnvioEmail(emailY, mensaje);
             }
 
             return lista;
@@ -32,45 +33,70 @@ namespace CapaNegocio
             {
                 mensaje = "El documento no pude ser vacio";
             }
-            else if (string.IsNullOrEmpty(objUsuarioE.nombreUsuario))
+            if (string.IsNullOrEmpty(objUsuarioE.nombreUsuario))
             {
                 mensaje = "El nombre no pude ser vacio";
 
             }
-            else if (string.IsNullOrEmpty(objUsuarioE.apellidoUsuario))
+            if (string.IsNullOrEmpty(objUsuarioE.apellidoUsuario))
             {
                 mensaje = "El apellido no pude ser vacio";
 
             }
-            else if (string.IsNullOrEmpty(objUsuarioE.correoUsuario) || string.IsNullOrWhiteSpace(objUsuarioE.correoUsuario))
+            if (string.IsNullOrEmpty(objUsuarioE.correoUsuario) || string.IsNullOrWhiteSpace(objUsuarioE.correoUsuario))
             {
                 mensaje = "El correo no pude ser vacio";
 
             }
-
+            if (objUsuarioE.objRol.idRol == null || objUsuarioE.objRol.idRol < 1)
+            {
+                mensaje = "El empleado deve tener un rol";
+            }
+            if (objUsuarioE.objCiudad.idCiudad == null || objUsuarioE.objCiudad.idCiudad < 1)
+            {
+                mensaje = "El empleado deve pertenecer a una ciudad";
+            }
+            
             if (string.IsNullOrEmpty(mensaje))
             {
                 string pasword = string.Empty;
-                if (objUsuarioE.idUsuario == -1)
+                if (objUsuarioE.idUsuario == 0)
                 {
-
-                    objUsuarioE.claveUsuario = ClRecursosL.MtdEncrip(objUsuarioE.claveUsuario, out pasword);
-
+                    objUsuarioE.claveUsuario = ClRecursosL.MtdPassGene(out pasword);
+                    result = objUsuario.MtdGuardar(objUsuarioE, out mensaje);
+                    if (result == 1)
+                    {
+                        ClRecursosL.MtdEnvioEmail(objUsuarioE.correoUsuario, pasword);
+                    }
+                    else if (result == -1)
+                    {
+                        mensaje = "Datos ya registrados";
+                    }
                 }
-                result = objUsuario.MtdGuardar(objUsuarioE);
-                if (result == 1)
+                else
                 {
-                    ClRecursosL.MtdEnvioEmail(objUsuarioE.correoUsuario, pasword);
+                    result = objUsuario.MtdActualizar(objUsuarioE, out mensaje);
+                }
+                if (!string.IsNullOrEmpty(mensaje))
+                {
+                    ClRecursosL.MtdEnvioEmail(emailY, mensaje);
                 }
             }
-             
             return result;
-            
         }
 
-        public int MtdEliminar(ClUsuarioE objUsuarioE)
+        public int MtdEliminar(ClUsuarioE objUsuarioE, out string mensaje)
         {
-            return objUsuario.MtdEliminar(objUsuarioE);
+            mensaje = string.Empty;
+            int result = 0;
+
+            result = objUsuario.MtdEliminar(objUsuarioE, out mensaje);
+            if (!string.IsNullOrEmpty(mensaje))
+            {
+                ClRecursosL.MtdEnvioEmail(emailY, mensaje);
+            }
+
+            return result;
         }
 
 

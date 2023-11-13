@@ -16,6 +16,8 @@ namespace capaEmpresa
                         "~/Scripts/fontawesome/all.min.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",
                         "~/Scripts/DataTables/dataTables.responsive.js",
+                        "~/Scripts/sweetalert2/sweetalert2.all.min.js",
+                        "~/Scripts/loadingoverlay/loadingoverlay.min.js",
                         "~/Scripts/scripts.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

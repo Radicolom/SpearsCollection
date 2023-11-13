@@ -7,14 +7,12 @@ using System.Net.Mail;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using static CapaEntidad.ClDatos;
 
 namespace CapaNegocio
 {
     public class ClRecursosL
     {
-        public string MtdPassGene(out string passGener)
+        public static string MtdPassGene(out string passGener)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             StringBuilder sb = new StringBuilder();
@@ -65,10 +63,6 @@ namespace CapaNegocio
                     using (MailMessage mensaje = new MailMessage())
                     {
                         mensaje.From = new MailAddress(remitenteEmail);
-                        if (destino.Equals("error"))
-                        {
-                            destino = "speearscollectionbbc@gmail.com";
-                        }
                         mensaje.To.Add(destino);
                         mensaje.Subject = "Tu contraseña";
 

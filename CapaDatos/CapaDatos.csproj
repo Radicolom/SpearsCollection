@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClCiudadD.cs" />
     <Compile Include="ClConexion.cs" />
     <Compile Include="ClRolD.cs" />
     <Compile Include="ClUsuarioD.cs" />
