@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaEntidad;
+using CapaNegocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,5 +15,22 @@ namespace capaEmpresa.Controllers
         {
             return View();
         }
+
+        public ActionResult Insumo()
+        {
+            return View();
+        }
+        
+
+
+        [HttpGet]
+        public JsonResult MtdListarProveedor()
+        {
+            List<ClUsuarioE> objLista = new List<ClUsuarioE>();
+            objLista = new ClProvedorL().MtdListar();
+
+            return Json(new { data = objLista }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

@@ -10,7 +10,7 @@
 </ol>
 
 <div class="btn-group">
-    <button type="button" class="btn btn-outline-success" data-bs-target="#MdRol" data-bs-toggle="modal">
+    <button id="btnProveedores" type="button" class="btn btn-outline-success">
         <i class="fas fa-eye"></i>
         Proveedores
     </button>
@@ -23,7 +23,7 @@
     </div>
 
 </div>
-<div class="card mb-4">
+<div class="card bg-dark text-white custom-card mb-4">
     <div class="card-header">
         <i class="fas fa-duotone fa-dolly"></i>
         Pedidos
@@ -32,8 +32,8 @@
         <div class="row">
             <div class="col-4">
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    <label for="text" class="form-label">N° Compra</label>
+                    <input type="text" class="form-control" id="txtNumeroCompra" placeholder="123456">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="col-6">
-                <table id="tablaUsuarios" class="table table-dark table-striped display cell-border" style="width: 100%">
+                <table id="tablaCompras" class="table table-dark table-striped display cell-border" style="width: 100%">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -61,22 +61,50 @@
                         </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCompra">
+        Open modal
+    </button><!-- The Modal -->
+    <div class="modal" id="modalCompra">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <i class="fas fa-search-dollar"></i>
+                        Detalle Compra
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
 
 
-    <div class="modal fade" id="MdRol" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="MdProveedor" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
                         <i class="fas fa-cubes"></i>
-
                         Proveedores
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -84,7 +112,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col">
-                            <table id="tablaUsuarios" class="table table-dark table-striped display cell-border" style="width: 100%">
+                            <table id="tblProveedor" class="table table-dark table-striped display cell-border" style="width: 100%">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -103,12 +131,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    @*<button id="CancelarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button id="GuardarRol" type="button" class="btn btn-primary">Agregar</button>*@
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
+    @section scripts{
+        <script src="~/Scripts/Js/CtCompra.js"></script>
+    }
 
 </div>

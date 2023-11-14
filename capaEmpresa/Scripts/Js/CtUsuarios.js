@@ -78,7 +78,6 @@
                     dataSet.push([contar, item.documentoUsuario, item.nombreUsuario, item.apellidoUsuario, item.tellUsuario, item.objRol.nombreRol,
                         (item.estadoUsuario ? '<span class="badge text-bg-success"><i>Activo</i></span>' : '<span class="badge text-bg-warning"><i>No Activo</i></span>'),
                         objBotones.defaultContent
-
                     ]);
                 }
 
@@ -97,7 +96,7 @@
         objTabla = $("#tablaUsuarios").DataTable({
             data: dataSet,
             responsive: true,
-            ordering: false,
+            ordering: true,
             language: {
                 url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json"
             }
@@ -172,7 +171,13 @@
         Swal.fire({
             icon: "success",
             timer: 1500,
-            showConfirmButton: false
+            showConfirmButton: false,
+            customClass: {
+                popup: 'bg-dark text-white',
+                content: 'text-white',
+                title: 'text-white'
+                // Puedes agregar más clases según sea necesario
+            }
         });
     }
 
@@ -184,6 +189,12 @@
             showCancelButton: true,
             confirmButtonText: "Confirmar",
             cancelButtonText: "Cancelar",
+            customClass: {
+                popup: 'bg-dark text-white',
+                content: 'text-white',
+                title: 'text-white'
+                // Puedes agregar más clases según sea necesario
+            }
         }).then((result) => {
             if (result.isConfirmed) {
                 if (tarea) {
@@ -200,7 +211,13 @@
             title: mensaje,
             icon: "error",
             timer: 1500,
-            showConfirmButton: false
+            showConfirmButton: false,
+            customClass: {
+                popup: 'bg-dark text-white',
+                content: 'text-white',
+                title: 'text-white'
+                // Puedes agregar más clases según sea necesario
+            }
         });
     }
 
@@ -256,7 +273,6 @@
     })
 
     $("#Guardar").on("click", function () {
-        debugger;
         $(".modal-body").LoadingOverlay("show");
 
         var registro = {

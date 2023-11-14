@@ -34,6 +34,7 @@ namespace capaEmpresa
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css",
                 "~/Content/AdCss/custom-styles.css",
+                "~/Content/CssPro/Style.css",
                 "~/Content/DataTables/css/responsive.dataTables.css",
                 "~/Content/DataTables/css/jquery.dataTables.css"));
         }

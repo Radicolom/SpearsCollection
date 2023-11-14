@@ -2,13 +2,14 @@
 using CapaEntidad;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
-    public class ClUsuarioL
+    public class ClProvedorL
     {
         private string emailY = "speearscollectionbbc@gmail.com";
         private ClUsuarioD objUsuario = new ClUsuarioD();
@@ -16,24 +17,31 @@ namespace CapaNegocio
         {
             string mensaje = string.Empty;
             List<ClUsuarioE> lista = objUsuario.MtdListar(out mensaje);
-
+            List<ClUsuarioE> provedorList = new List<ClUsuarioE>();
+            foreach (ClUsuarioE columna in lista)
+            {
+                if (string.Equals(columna.objRol.nombreRol, "Proveedor", StringComparison.OrdinalIgnoreCase)
+                    && columna.estadoUsuario == true)
+                {
+                    provedorList.Add(columna);
+                }
+            }
             if (!string.IsNullOrEmpty(mensaje))
             {
                 ClRecursosL.MtdEnvioEmail(emailY, mensaje);
             }
 
-            return lista;
+            return provedorList;
         }
+
+
+
 
         public int MtdGuardar(ClUsuarioE objUsuarioE, out string mensaje)
         {
             int result = 0;
             mensaje = string.Empty;
-            if (!objUsuarioE.documentoUsuario.All(char.IsDigit))
-            {
-                mensaje = "El documento debe contener solo números";
-            } 
-            else if (string.IsNullOrEmpty(objUsuarioE.documentoUsuario) || string.IsNullOrWhiteSpace(objUsuarioE.documentoUsuario))
+            if (string.IsNullOrEmpty(objUsuarioE.documentoUsuario) || string.IsNullOrWhiteSpace(objUsuarioE.documentoUsuario))
             {
                 mensaje = "El documento no pude ser vacio";
             }
@@ -60,7 +68,7 @@ namespace CapaNegocio
             {
                 mensaje = "El empleado deve pertenecer a una ciudad";
             }
-            
+
             if (string.IsNullOrEmpty(mensaje))
             {
                 string pasword = string.Empty;
