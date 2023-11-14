@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Compra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Empresa</a></li>
+    <li class="breadcrumb-item active">Compras</li>
+</ol>
+
+<div class="btn-group">
+    <button type="button" class="btn btn-outline-success" data-bs-target="#MdRol" data-bs-toggle="modal">
+        <i class="fas fa-eye"></i>
+        Proveedores
+    </button>
+    <div class="btn-group dropend" role="group">
+        <button id="btnEliminarRol" type="button" class="btn btn-outline-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Eliminar Rol
+        </button>
+        <ul id="listaRoles" class="dropdown-menu">
+        </ul>
+    </div>
+
+</div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-duotone fa-dolly"></i>
+        Pedidos
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+            </div>
+            <div class="col-6">
+                <table id="tablaUsuarios" class="table table-dark table-striped display cell-border" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>N°Compra</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Repre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="MdRol" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <i class="fas fa-cubes"></i>
+
+                        Proveedores
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <table id="tablaUsuarios" class="table table-dark table-striped display cell-border" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Documento</th>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>tell</th>
+                                        <th>Estado</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @*<button id="CancelarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="GuardarRol" type="button" class="btn btn-primary">Agregar</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

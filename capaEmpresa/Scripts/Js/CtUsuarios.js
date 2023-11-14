@@ -256,7 +256,7 @@
     })
 
     $("#Guardar").on("click", function () {
-
+        debugger;
         $(".modal-body").LoadingOverlay("show");
 
         var registro = {
