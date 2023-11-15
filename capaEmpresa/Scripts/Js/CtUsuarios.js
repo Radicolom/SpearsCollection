@@ -69,8 +69,8 @@
                         orderable: false,
                         searchable: false,
                         defaultContent: '<div class="btn-group">' +
-                            '<button id="btnEditar" type="button" class="btn btn-primary"><i class="fas fa-pen"></i></button>' +
-                            '<button id="btnEliminar" type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>' +
+                            '<button id="btnEditar" type="button" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>' +
+                            '<button id="btnEliminar" type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>' +
                             '</div>'
                     };
                     contar++;

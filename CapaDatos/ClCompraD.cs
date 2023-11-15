@@ -20,9 +20,20 @@ namespace CapaDatos
             {
                 using (SqlConnection conex = objConexion.MtdAbrirConex())
                 {
-                    SqlCommand cmd = new SqlCommand("", conex);
+                    SqlCommand cmd = new SqlCommand("SP_ListarInsumosCompra", conex);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("", "");
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ClDetalleCompraE = new ClDetalleCompraE()
+                            {
+
+                            }
+                        }
+                    }
+
                 }
             }
             catch (Exception exp)

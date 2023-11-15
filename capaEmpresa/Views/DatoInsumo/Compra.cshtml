@@ -9,20 +9,11 @@
     <li class="breadcrumb-item active">Compras</li>
 </ol>
 
-<div class="btn-group">
-    <button id="btnProveedores" type="button" class="btn btn-outline-success">
-        <i class="fas fa-eye"></i>
-        Proveedores
-    </button>
-    <div class="btn-group dropend" role="group">
-        <button id="btnEliminarRol" type="button" class="btn btn-outline-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Eliminar Rol
-        </button>
-        <ul id="listaRoles" class="dropdown-menu">
-        </ul>
-    </div>
+<button id="btnProveedores" type="button" class="btn btn-success">
+    <i class="fas fa-eye"></i>
+    Proveedores
+</button>
 
-</div>
 <div class="card bg-dark text-white custom-card mb-4">
     <div class="card-header">
         <i class="fas fa-duotone fa-dolly"></i>
@@ -48,9 +39,9 @@
                     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
                 </div>
             </div>
-            <div class="col-6">
-                <table id="tablaCompras" class="table table-dark table-striped display cell-border" style="width: 100%">
-                    <thead>
+            <div class="col-8">
+                <table id="tablaCompras" class="table" style="width: 100%">
+                    <thead class="table-dark">
                         <tr>
                             <th>#</th>
                             <th>N°Compra</th>
@@ -60,45 +51,84 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table-success">
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCompra">
-        Open modal
-    </button><!-- The Modal -->
-    <div class="modal" id="modalCompra">
-        <div class="modal-dialog">
+    <!--DatosCompras-->
+    <div class="modal" id="modalCompra" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-
-                <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        <i class="fas fa-search-dollar"></i>
-                        Detalle Compra
-                    </h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <i class="fas fa-cubes"></i>
+                        Proveedores
+                    </h5>
                 </div>
-
-                <!-- Modal body -->
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Documento:</label>
+                                <input type="text" class="form-control" id="txtDocumento" placeholder="Digite el documento" name="txtDocumento">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Nombres:</label>
+                                <input type="text" class="form-control" id="txtNombre" placeholder="Digite el nombre" name="txtNombre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Apellidos:</label>
+                                <input type="text" class="form-control" id="txtApellido" placeholder="Digite los apellidos" name="txtApellido">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Telefono:</label>
+                                <input type="text" class="form-control" id="txtTell" placeholder="Digite los apellidos" name="txtTell">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo:</label>
+                                <input type="email" class="form-control" id="txtCorreo" placeholder="Digite el correo" name="txtCorreo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Direccion:</label>
+                                <input type="text" class="form-control" id="txtDireccion" placeholder="Digite el correo" name="txtDireccion">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Estado:</label>
+                                <select id="btsEstado" class="form-select" aria-label="Default select example">
+                                    <option disabled>Seleccione una opcion</option>
+                                    <option value="0">Activo</option>
+                                    <option value="1">No activo</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Tipo Usuario:</label>
+                                <select id="btsTipoUsuario" class="form-select" aria-label="Default select example">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Ciudad:</label>
+                                <select id="btsCiudad" class="form-select" aria-label="Default select example">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
-
-                <!-- Modal footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
-
             </div>
         </div>
     </div>
 
 
+    <!--Tabla Proveedores -->
     <div class="modal fade" id="MdProveedor" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

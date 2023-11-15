@@ -4,7 +4,7 @@
     var objTablaCom = null;
     var todosLosDatos = [];
     var todosDatosCom = [];
-
+    crearTablaCompras();
     function cargarAjax(ruta, tarea) {
         $.ajax({
             url: "/DatoInsumo/" + ruta,
@@ -102,28 +102,28 @@
 
     //Compras
     function crearTablaCompras() {
-        cargarAjax('MtdListarUsuario', function (datos) {
+        cargarAjax('MtdListarCompra', function (datos) {
             todosDatosCom = datos;
             if (datos != null) {
                 var dataSet = [];
                 var contar = 0;
 
-                datos.forEach(listarUsuarios);
+                datos.forEach(listarCompra);
 
-                function listarUsuarios(item, index) {
+                function listarCompra(item, index) {
 
                     var objBotones = {
                         orderable: false,
                         searchable: false,
-                        defaultContent: '<div class="btn-group">' +
-                            '<button id="btnDatos" type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button>' +
-                            '</div>'
+                        defaultContent: '<center>' +
+                            '<button id="btnDatos" type="button" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></button>' +
+                            '</center>'
                     };
                     contar++;
 
                     dataSet.push([contar, item.objCompra.numeroCompra, item.objCompra.fechaCompra,
                         (item.objCompra.estadoCompra ? '<span class="badge text-bg-success"><i>Activo</i></span>' : '<span class="badge text-bg-warning"><i>No Activo</i></span>'),
-                        item.objCompra.objProveedor.nombreProveedor,
+                        item.objCompra.objProveedor.nombreUsuario,
                         objBotones.defaultContent
                     ]);
                 }
@@ -135,21 +135,21 @@
     }
 
     function armarTablaCompras(dataSet) {
-        if (todosDatosCom != null) {
+        if (objTablaCom != null) {
             $("#tablaCompras").dataTable().fnDestroy();
         }
 
-        todosDatosCom = $("#tablaCompras").DataTable({
+        objTablaCom = $("#tablaCompras").DataTable({
             data: dataSet,
             responsive: true,
-            ordering: false,
+            ordering: true,
             language: {
                 url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json"
             }
         })
     }
 
-
+    //proveedor
 
     $("#btnProveedores").on("click", function () {
 
@@ -160,9 +160,22 @@
     $("#tblProveedor").on("click", "#btnProvedor", function () {
         var indiceFila = objTablaPro.row($(this).closest("tr")).index();
         var valorDeseado = todosLosDatos[indiceFila];
-        console.log(valorDeseado.idUsuario)
         $("#MdProveedor").modal("hide");
         $("#txtNumeroCompra").val(valorDeseado.idUsuario);
+
+    })
+
+    //compras
+    $("#tablaCompras").on("click", "#btnDatos", function () {
+        var indiceFila = objTablaCom.row($(this).closest("tr")).index();
+        var valorDeseado = todosDatosCom[indiceFila];
+        
+        $("#modalCompra").modal("show");
+
+
+
+
+
 
     })
 

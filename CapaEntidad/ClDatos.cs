@@ -150,8 +150,7 @@ namespace CapaEntidad
         public string numeroCompra { get; set; }
         public bool estadoCompra { get; set; }
         public string fechaCompra { get; set; }
-        public int idProveedor { get; set; }
-        public ClProveedorE objProveedor { get; set; }
+        public ClUsuarioE objProveedor { get; set; }
     }
 
     public class ClInsumoE
@@ -169,10 +168,8 @@ namespace CapaEntidad
         public int idDetalleCompra { get; set; }
         public int cantidadCompra { get; set; }
         public decimal precioCompra { get; set; }
-        public int idCompra { get; set; }
-        public int idProductoLocal { get; set; }
         public ClCompraE objCompra { get; set; }
-        public ClProductoLocalE objProductoLocal { get; set; }
+        public ClInsumoE objInsumo { get; set; }
     }
 
     public class ClInsumoProveedorE

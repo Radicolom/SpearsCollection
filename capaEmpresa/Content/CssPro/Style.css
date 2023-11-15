@@ -1,9 +1,10 @@
 ﻿
 body {
     background-image: url('fodo.jpg');
-    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
-    background-position: center; /* Centra la imagen en el fondo */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .navbar-brand-style {
@@ -37,5 +38,15 @@ div.modal-content {
     font-weight: bold;
     text-shadow: 1px 1px 2px black;
 }
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
 
 
