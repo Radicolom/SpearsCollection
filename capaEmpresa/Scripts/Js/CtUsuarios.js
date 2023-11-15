@@ -235,7 +235,6 @@
         abrirModal();
 
         $(".modal-title").html('<i class="fas fa-user"></i><i class="fas fa-pen fa-xs"></i> EditarUsuario');
-
         $("#txtDocumento").val(data.documentoUsuario);
         $("#txtNombre").val(data.nombreUsuario);
         $("#txtApellido").val(data.apellidoUsuario);
@@ -243,9 +242,8 @@
         $("#txtCorreo").val(data.correoUsuario);
         $("#txtDireccion").val(data.direccionUsuario);
         $("#btsEstado").val(data.estadoUsuario ? "0" : "1");
-        $("#btsTipoUsuario").val(data.objRol.idRol.toString());
-        $("#btsCiudad").val(data.objCiudad.idCiudad.toString());
-        debugger;
+        $("#btsTipoUsuario").val(data.objRol.idRol);
+        $("#btsCiudad").val(data.objCiudad.idCiudad);
         cargado = data.idUsuario;
     });
 

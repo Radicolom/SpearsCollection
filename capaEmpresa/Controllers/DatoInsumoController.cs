@@ -20,8 +20,31 @@ namespace capaEmpresa.Controllers
         {
             return View();
         }
-        
 
+        [HttpGet]
+        public JsonResult MtdListarCompra() 
+        {
+            List<ClDetalleCompraE> objLista = new ClCompraL().MtdListar();
+
+            return Json(new { data = objLista}, JsonRequestBehavior.AllowGet);
+        
+        }
+
+        [HttpPost]
+        public JsonResult MtdGuardar(ClDetalleCompraE objCompra)
+        {
+            string mensaje = string.Empty;
+            int result = 0;
+            return Json(new { data = result, mensaje = mensaje });
+        }
+
+        [HttpPost]
+        public JsonResult MtdEliminar(ClDetalleCompraE objCompra)
+        {
+            string mensaje = string.Empty;
+            int result = 0;
+            return Json(new { data = result, mensaje = mensaje });
+        }
 
         [HttpGet]
         public JsonResult MtdListarProveedor()

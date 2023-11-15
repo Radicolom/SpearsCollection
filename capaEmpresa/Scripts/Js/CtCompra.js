@@ -102,7 +102,7 @@
 
     //Compras
     function crearTablaCompras() {
-        cargarAjax('/Home/MtdListarUsuario', function (datos) {
+        cargarAjax('MtdListarUsuario', function (datos) {
             todosDatosCom = datos;
             if (datos != null) {
                 var dataSet = [];
@@ -116,19 +116,19 @@
                         orderable: false,
                         searchable: false,
                         defaultContent: '<div class="btn-group">' +
-                            '<button id="btnProvedor" type="button" class="btn btn-primary"><i class="fas fa-hand-pointer"></i></button>' +
+                            '<button id="btnDatos" type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button>' +
                             '</div>'
                     };
                     contar++;
 
-                    dataSet.push([contar, item.documentoUsuario, item.nombreUsuario, item.apellidoUsuario, item.tellUsuario,
-                        (item.estadoUsuario ? '<span class="badge text-bg-success"><i>Activo</i></span>' : '<span class="badge text-bg-warning"><i>No Activo</i></span>'),
+                    dataSet.push([contar, item.objCompra.numeroCompra, item.objCompra.fechaCompra,
+                        (item.objCompra.estadoCompra ? '<span class="badge text-bg-success"><i>Activo</i></span>' : '<span class="badge text-bg-warning"><i>No Activo</i></span>'),
+                        item.objCompra.objProveedor.nombreProveedor,
                         objBotones.defaultContent
-
                     ]);
                 }
 
-                armarTablaProveedores(dataSet);
+                armarTablaCompras(dataSet);
             }
 
         });
