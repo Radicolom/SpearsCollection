@@ -21,6 +21,16 @@ namespace capaEmpresa.Controllers
             return View();
         }
 
+        public ActionResult cortes()
+        {
+            return View();
+        }
+
+        public ActionResult EntregasSatelite()
+        {
+            return View();
+        }
+
         [HttpGet]
         public JsonResult MtdListarCompra() 
         {

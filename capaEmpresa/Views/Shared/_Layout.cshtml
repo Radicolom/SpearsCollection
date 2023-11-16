@@ -45,7 +45,7 @@
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Resumen</div>
                         <a class="nav-link" href="@Url.Action("Index","Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-crow"></i></div>
                             Dashboard
                         </a>
                         <a class="nav-link" href="@Url.Action("Usuarios","Home")">
@@ -68,6 +68,14 @@
                                 <a class="nav-link" href="@Url.Action("Insumo","DatoInsumo")">
                                     <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
                                     Insumos
+                                </a>
+                                <a class="nav-link" href="@Url.Action("cortes","DatoInsumo")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-drafting-compass"></i></div>
+                                    cortes
+                                </a>
+                                <a class="nav-link" href="@Url.Action("EntregasSatelite","DatoInsumo")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-calendar-day"></i></div>
+                                    Entregas
                                 </a>
                                 <a class="nav-link" href="layout-static.html">Static Navigation</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
@@ -122,7 +130,7 @@
                             Proveedores
                         </a>
                         <a class="nav-link" href="@Url.Action("Usuarios","Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-microscope fa-flip-horizontal"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-ruler-combined"></i></div>
                             Satelites
                         </a>
                         
@@ -136,7 +144,7 @@
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4">
+                <div class="container-fluid px-4 text-white">
 
                     @RenderBody()
 

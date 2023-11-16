@@ -474,6 +474,8 @@
     <Content Include="Views\Mantenedor\Producto.cshtml" />
     <Content Include="Views\DatoInsumo\Compra.cshtml" />
     <Content Include="Views\DatoInsumo\Insumo.cshtml" />
+    <Content Include="Views\DatoInsumo\cortes.cshtml" />
+    <Content Include="Views\DatoInsumo\EntregasSatelite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
