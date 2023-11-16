@@ -20,6 +20,17 @@ namespace capaEmpresa.Controllers
             return View();
         }
 
+        public ActionResult Proveedores()
+        {
+            return View();
+        }
+
+        public ActionResult Satelites()
+        {
+            return View();
+        }
+
+
         [HttpGet]
         public JsonResult MtdListarUsuario()
         {

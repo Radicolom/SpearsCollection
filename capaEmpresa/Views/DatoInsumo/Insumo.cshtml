@@ -9,7 +9,7 @@
     <li class="breadcrumb-item active">Insumos</li>
 </ol>
 
-<div class="mt-5 container" id="contenedorAdopta">
+<div class="container" id="CntInsumos">
     <div class="row">
         <div class="col sm-6">
             <div class="input-group">
@@ -23,88 +23,66 @@
         </div>
         <div class="col sm-4">
         </div>
-        <div class="col sm-2" id="BtnEspecie">
+        <div class="col sm-2 mb-4" id="BtnEspecie">
             <center>
-                <div class="btn-group" id="btnEspecieRaza">
-                    <div class="btn-group">
-                        <button type="button" id="selecionarEs" class="colorest btn dropdown-toggle" data-bs-toggle="dropdown">Especie</button>
-                        <div class="dropdown-menu" id="listaBusquedaAnimalEspecie">
-                            <!-- ARCHIVO -->
-                        </div>
-                    </div>
-                    <div class="btn-group" id="btnSelecRaza" style="display: none;">
-                        <button type="button" class="colorest btn dropdown-toggle" data-bs-toggle="dropdown">Raza</button>
-                        <div class="dropdown-menu" id="listaBusquedaAnimalRaza">
-                            <!-- ARCHIVO -->
-                        </div>
-                    </div>
-                    <div class="btn-group" id="Recarga">
-                        <button type="button" class="btn btn-secondary" id="NoFiltrar">Regresar</button>
-                    </div>
+                <div class="btn-group">
+
 
                 </div>
             </center>
         </div>
     </div>
 
-    <br>
-    <br>
-
     <div class="card bg-dark text-white custom-card mb-4">
-        <div class="row" id="adopcionListas">
-            <h1>
-                Datos
-
-                insumos
-                en cartas
-                aqui
-            </h1>
-            <h3>esta en js copiar</h3>
-            '<div class="col" compR="' + item.compRaz +
-                '" compE="' + item.compEsp +
-                '">
-                <button id="btnAnimal" type="button" class="btn" idEspecie=' + item.idAnimal +
-                ' imagenAnimal='+ item.imagen +
-                ' nombreAnimal=' + item.nombreAnimal +
-                ' sexoAnimal=' + item.sexo +
-                ' edadAnimal="' + item.edad +
-                '" especie="' + item.especie +
-                '" raza="' + item.raza +
-                '" descripcion="' + item.descripcion +
-                '" nombreUsuario="' + item.nombre + ' ' + item.apellido +
-                '" correo=' + item.correo +
-                ' tell=' + item.tell +
-                ' direccion=' + item.ciudad + '>
-                    <div class="colorest card" style="width: 200px; background-color:#ffc273;">
-                        <br><img class="imageredond" style="width: 170px; height: 170px; margin: auto;" src="data:image/jpg;base64,' +
-                item.imagen +
-                '" alt="Mi foto"><div class="card-body">
-                            <h4 class="card-title">NOMBRE:</h4><h4 class="card-title">
-                                ' +
-                                item.nombreAnimal +
-                                '
-                            </h4><h5>ESPECIE:</h5><h5 class="card-text">
-                                ' +
-                                item.especie +
-                                '
-                            </h5>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-3">
+                    <button id="btnRegistrar" type="button" class="btn btn-outline-secondary">Registrar Insumo</button>
+                </div>
+                <div class="col-6">
+                    <center>
+                        <i class="fas fa-boxes"></i>
+                        Insumos
+                    </center>
+                </div>
+                <div class="col-3">
+                    <div class="btn-group">
+                        <button type="button" id="selecionarEs" class="btn btn-outline-secondary" data-bs-toggle="dropdown">Material</button>
+                        <div class="dropdown-menu" id="listaBusquedaMaterial">
+                            <!-- ARCHIVO -->
                         </div>
+                        <button type="button" class="btn btn-secondary" id="NoFiltrar">Regresar</button>
                     </div>
-                </button>
-            </div>';
+                </div>
+            </div>
+        </div>
+        <div class="row" id="CartasInsumo">
+
+            @* Cartas *@
+
         </div>
     </div>
 </div>
 
-<div class="mt-5 container" id="contenedorDatosAnimal" style="display: none;">
-    <br>
-    <div class="mt-5 row">
+
+@* DatosInsumos *@
+
+<div class="container mb-4" id="CntDatosInsumo" style="display: none;">
+    <div class="row">
         <center>
-            <h1>🐶 DATOS DEL ANIMAL 🐯</h1>
+            <h1>
+                
+            </h1>
         </center>
         <br>
         <div class="col">
-            <div class="card text-white" style="width: 400px; background-color:#b46743a1;">
+            <div class="card bg-dark text-white" style="width: 400px;">
+                <div class="card-header">
+                    <center>
+                        <i class="fas fa-file"></i>
+                        Datos insumo
+                    </center>
+                </div>
                 <div class="card-body">
                     <center>
                         <label for="text" class="form-label">Foto:</label>
@@ -113,41 +91,32 @@
                     </center>
                     <div class="mb-3 mt-3">
                         <label for="text" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nombreAnimalDatos" name="nombreAnimalDatos" disabled>
+                        <input type="text" class="form-control" id="txtNombre" name="txtNombre" disabled>
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-3 mt-3">
-                                <label for="text" class="form-label">Sexo:</label>
-                                <input type="text" class="form-control" id="sexoAnimalDatos" name="sexoAnimalDatos" disabled>
+                                <label for="text" class="form-label">Material:</label>
+                                <input type="text" class="form-control" id="txtMaterial" name="txtMaterial" disabled>
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-3 mt-3">
-                                <label for="text" class="form-label">Edad:</label>
-                                <input type="text" class="form-control" id="edadAnimalDatos" name="edadAnimalDatos" disabled>
+                                <label for="text" class="form-label">Cantidad:</label>
+                                <input type="text" class="form-control" id="txtCantidad" name="txtCantidad" disabled>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3 mt-3">
-                                <label for="text" class="form-label">Especie:</label>
-                                <input type="text" class="form-control" id="especieDatos" name="especieDatos" disabled>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3 mt-3">
-                                <label for="text" class="form-label">Raza:</label>
-                                <input type="text" class="form-control" id="razaDatos" placeholder="Indefinida" name="razaDatos" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <label for="comment">Descripción:</label>
-                    <textarea class="form-control" rows="5" name="descripcionDatos" id="descripcionDatos" disabled></textarea>
+                    
+                    <label for="comment">Descripcion Insumo:</label>
+                    <textarea class="form-control" rows="3" name="txtDesInsumo" id="txtDesInsumo" disabled></textarea>
+                    <label for="comment">Descripcion Material:</label>
+                    <textarea class="form-control" rows="3" name="txtDesMaterial" id="txtDesMaterial" disabled></textarea>
                 </div>
             </div>
         </div>
+
+
         <div class="col">
             <div class="card text-white" style="margin: auto; width: 400px; background-color:#b46743a1;">
                 <div class="card-body">
@@ -185,3 +154,55 @@
 
     </div>
 </div>
+
+@* Registro *@
+
+<div class="modal fade" id="MdInsumos" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <i class="fas fa-pen-nib"></i>
+                    Registro Rol
+                </h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Nombre Rol:</label>
+                            <input type="text" class="form-control" id="txtRol" placeholder="Escriba el nombre" name="txtRol">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <center>
+                    <div class="col-8">
+                        <div id="alertaRol" class="alert alert-danger" role="alert" style="display: none">
+
+
+                        </div>
+                    </div>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button id="CancelarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="GuardarRol" type="button" class="btn btn-primary">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    <script src="~/Scripts/Js/Insumos.js"></script>
+}

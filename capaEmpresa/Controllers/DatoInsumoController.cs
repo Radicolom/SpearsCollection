@@ -31,6 +31,7 @@ namespace capaEmpresa.Controllers
             return View();
         }
 
+        //Compras
         [HttpGet]
         public JsonResult MtdListarCompra() 
         {
@@ -56,6 +57,7 @@ namespace capaEmpresa.Controllers
             return Json(new { data = result, mensaje = mensaje });
         }
 
+        //Proveedores
         [HttpGet]
         public JsonResult MtdListarProveedor()
         {
@@ -64,6 +66,20 @@ namespace capaEmpresa.Controllers
 
             return Json(new { data = objLista }, JsonRequestBehavior.AllowGet);
         }
+
+
+        //Insumos
+        [HttpGet]
+        public JsonResult MtdListarInsumo()
+        {
+            string mensaje = string.Empty;
+            List<ClInsumoE> lista = new ClInsumoL().MtdListar();
+            return Json(new { data = lista, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
 
     }
 }

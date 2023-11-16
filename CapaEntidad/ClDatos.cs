@@ -159,7 +159,6 @@ namespace CapaEntidad
         public string nombreInsumo { get; set; }
         public int cantidadInsumo { get; set; }
         public string descripcionInsumo { get; set; }
-        public int idMaterial { get; set; }
         public ClMaterialE objMaterial { get; set; }
     }
 

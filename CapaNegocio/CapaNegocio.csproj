@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ClCiudadL.cs" />
     <Compile Include="ClCompraL.cs" />
+    <Compile Include="ClInsumoL.cs" />
     <Compile Include="ClProvedorL.cs" />
     <Compile Include="ClRecursosL.cs" />
     <Compile Include="ClRolL.cs" />

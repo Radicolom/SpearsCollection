@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "Satelites";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Equipo</a></li>
+    <li class="breadcrumb-item active">Satelites</li>
+</ol>
+
+<button id="btnRegistrar" type="button" class="btn btn-success">Registrar Empleado</button>
+<div class="btn-group">
+    <button type="button" class="btn btn-outline-success" data-bs-target="#MdRol" data-bs-toggle="modal">Registrar Rol</button>
+    <div class="btn-group dropend" role="group">
+        <button id="btnEliminarRol" type="button" class="btn btn-outline-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Eliminar Rol
+        </button>
+        <ul id="listaRoles" class="dropdown-menu">
+        </ul>
+    </div>
+
+</div>
+<div class="card bg-dark text-white custom-card mb-4">
+    <div class="card-header">
+        <i class="fas fa-users"></i>
+        Lista Usuarios
+    </div>
+    <div class="card-body">
+        <table id="tablaUsuarios" class="table table-striped display cell-border" style="width: 100%">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Documento</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>tell</th>
+                    <th>Tipo Usuario</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="table-success">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="formModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Documento:</label>
+                            <input type="text" class="form-control" id="txtDocumento" placeholder="Digite el documento" name="txtDocumento">
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Nombres:</label>
+                            <input type="text" class="form-control" id="txtNombre" placeholder="Digite el nombre" name="txtNombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Apellidos:</label>
+                            <input type="text" class="form-control" id="txtApellido" placeholder="Digite los apellidos" name="txtApellido">
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Telefono:</label>
+                            <input type="text" class="form-control" id="txtTell" placeholder="Digite los apellidos" name="txtTell">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo:</label>
+                            <input type="email" class="form-control" id="txtCorreo" placeholder="Digite el correo" name="txtCorreo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Direccion:</label>
+                            <input type="text" class="form-control" id="txtDireccion" placeholder="Digite el correo" name="txtDireccion">
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Estado:</label>
+                            <select id="btsEstado" class="form-select" aria-label="Default select example">
+                                <option disabled>Seleccione una opcion</option>
+                                <option value="0">Activo</option>
+                                <option value="1">No activo</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Tipo Usuario:</label>
+                            <select id="btsTipoUsuario" class="form-select" aria-label="Default select example">
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Ciudad:</label>
+                            <select id="btsCiudad" class="form-select" aria-label="Default select example">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <center>
+                    <div class="col-8">
+                        <div id="alertaUsuario" class="alert alert-danger" role="alert" style="display: none">
+
+
+                        </div>
+                    </div>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button id="CancelarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="Guardar" type="button" class="btn btn-primary">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MdRol" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <i class="fas fa-pen-nib"></i>
+                    Registro Rol
+                </h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Nombre Rol:</label>
+                            <input type="text" class="form-control" id="txtRol" placeholder="Escriba el nombre" name="txtRol">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <center>
+                    <div class="col-8">
+                        <div id="alertaRol" class="alert alert-danger" role="alert" style="display: none">
+
+
+                        </div>
+                    </div>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button id="CancelarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="GuardarRol" type="button" class="btn btn-primary">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
