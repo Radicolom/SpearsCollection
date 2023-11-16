@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "Compra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Empresa</a></li>
+    <li class="breadcrumb-item active">Compras</li>
+</ol>
+
+<button id="btnProveedores" type="button" class="btn btn-success">
+    <i class="fas fa-eye"></i>
+    Proveedores
+</button>
+
+<div class="card bg-dark text-white custom-card mb-4">
+    <div class="card-header">
+        <i class="fas fa-duotone fa-dolly"></i>
+        Pedidos
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <div class="mb-3">
+                    <label for="text" class="form-label">N° Compra</label>
+                    <input type="text" class="form-control" id="txtNumeroCompra" placeholder="123456">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+            </div>
+            <div class="col-8">
+                <table id="tablaCompras" class="table" style="width: 100%">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>N°Compra</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Repre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-success">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--DatosCompras-->
+    <div class="modal" id="modalCompra" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <i class="fas fa-cubes"></i>
+                        Proveedores
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Documento:</label>
+                                <input type="text" class="form-control" id="txtDocumento" placeholder="Digite el documento" name="txtDocumento">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Nombres:</label>
+                                <input type="text" class="form-control" id="txtNombre" placeholder="Digite el nombre" name="txtNombre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Apellidos:</label>
+                                <input type="text" class="form-control" id="txtApellido" placeholder="Digite los apellidos" name="txtApellido">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Telefono:</label>
+                                <input type="text" class="form-control" id="txtTell" placeholder="Digite los apellidos" name="txtTell">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo:</label>
+                                <input type="email" class="form-control" id="txtCorreo" placeholder="Digite el correo" name="txtCorreo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Direccion:</label>
+                                <input type="text" class="form-control" id="txtDireccion" placeholder="Digite el correo" name="txtDireccion">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Estado:</label>
+                                <select id="btsEstado" class="form-select" aria-label="Default select example">
+                                    <option disabled>Seleccione una opcion</option>
+                                    <option value="0">Activo</option>
+                                    <option value="1">No activo</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Tipo Usuario:</label>
+                                <select id="btsTipoUsuario" class="form-select" aria-label="Default select example">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Ciudad:</label>
+                                <select id="btsCiudad" class="form-select" aria-label="Default select example">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Tabla Proveedores -->
+    <div class="modal fade" id="MdProveedor" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <i class="fas fa-cubes"></i>
+                        Proveedores
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <table id="tblProveedor" class="table table-dark table-striped display cell-border" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Documento</th>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>tell</th>
+                                        <th>Estado</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section scripts{
+        <script src="~/Scripts/Js/CtCompra.js"></script>
+    }
+
+</div>
