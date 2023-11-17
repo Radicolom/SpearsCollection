@@ -47,6 +47,7 @@
     <Compile Include="ClProvedorL.cs" />
     <Compile Include="ClRecursosL.cs" />
     <Compile Include="ClRolL.cs" />
+    <Compile Include="ClSateliteL.cs" />
     <Compile Include="ClUsuarioL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

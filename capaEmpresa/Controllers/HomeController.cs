@@ -58,6 +58,23 @@ namespace capaEmpresa.Controllers
             return Json(new { data = objLista }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult MtdListarProveedor()
+        {
+            List<ClUsuarioE> objLista = new List<ClUsuarioE>();
+            objLista = new ClProvedorL().MtdListar();
+
+            return Json(new { data = objLista }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult MtdListarSatelite()
+        {
+            List<ClUsuarioE> lista = new ClSateliteL().MtdListar();
+            return Json(new { data = lista }, JsonRequestBehavior.AllowGet);
+        }
+
+
         [HttpPost]
         public JsonResult MtdGuardarUsuario(ClUsuarioE objUsuario)
         {

@@ -20,8 +20,7 @@ namespace CapaNegocio
             List<ClUsuarioE> provedorList = new List<ClUsuarioE>();
             foreach (ClUsuarioE columna in lista)
             {
-                if (string.Equals(columna.objRol.nombreRol, "Proveedor", StringComparison.OrdinalIgnoreCase)
-                    && columna.estadoUsuario == true)
+                if (string.Equals(columna.objRol.nombreRol, "Proveedor", StringComparison.OrdinalIgnoreCase))
                 {
                     provedorList.Add(columna);
                 }
