@@ -17,7 +17,7 @@ namespace CapaNegocio
         {
             string mensaje = string.Empty;
             List<ClUsuarioE> lista = objUsuario.MtdListar(out mensaje);
-            List<ClUsuarioE> listaSatelite = objUsuario.MtdListar(out mensaje);
+            List<ClUsuarioE> listaSatelite = new List<ClUsuarioE>();
             
             foreach (ClUsuarioE columna in lista)
             {
@@ -34,5 +34,13 @@ namespace CapaNegocio
             return listaSatelite;
 
         }
+
+
+
+
+
+
+
+
     }
 }

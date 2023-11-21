@@ -61,6 +61,39 @@ namespace CapaDatos
 
         }
     
+        public int MtdGuardar(ClInsumoE objInsumo, out string mensaje)
+        {
+            mensaje = string.Empty;
+            int resultado = 0;
+
+            try
+            {
+                using (SqlConnection conex = objConexion.MtdAbrirConex())
+                {
+                    SqlCommand cmd = new SqlCommand("", conex);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("", objInsumo.nombreInsumo);
+                    cmd.Parameters.AddWithValue("", objInsumo.cantidadInsumo);
+                    cmd.Parameters.AddWithValue("", objInsumo.descripcionInsumo);
+                    cmd.Parameters.AddWithValue("", objInsumo.objMaterial.idMaterial);
+
+                    resultado = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception exp)
+            {
+                mensaje = exp.ToString();
+                throw;
+            }
+            finally
+            {
+                objConexion.MtdCerrarConex();
+
+            }
+
+            return resultado;
+        }
+
 
 
     }
