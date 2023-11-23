@@ -32,30 +32,30 @@ namespace capaEmpresa.Controllers
         }
 
         //Compras
-        [HttpGet]
-        public JsonResult MtdListarCompra() 
-        {
-            List<ClDetalleCompraE> objLista = new ClCompraL().MtdListar();
+        //[HttpGet]
+        //public JsonResult MtdListarCompra() 
+        //{
+        //    List<ClDetalleCompraE> objLista = new ClCompraL().MtdListar();
 
-            return Json(new { data = objLista}, JsonRequestBehavior.AllowGet);
+        //    return Json(new { data = objLista}, JsonRequestBehavior.AllowGet);
         
-        }
+        //}
 
-        [HttpPost]
-        public JsonResult MtdGuardar(ClDetalleCompraE objCompra)
-        {
-            string mensaje = string.Empty;
-            int result = 0;
-            return Json(new { data = result, mensaje = mensaje });
-        }
+        //[HttpPost]
+        //public JsonResult MtdGuardar(ClDetalleCompraE objCompra)
+        //{
+        //    string mensaje = string.Empty;
+        //    int result = 0;
+        //    return Json(new { data = result, mensaje = mensaje });
+        //}
 
-        [HttpPost]
-        public JsonResult MtdEliminar(ClDetalleCompraE objCompra)
-        {
-            string mensaje = string.Empty;
-            int result = 0;
-            return Json(new { data = result, mensaje = mensaje });
-        }
+        //[HttpPost]
+        //public JsonResult MtdEliminar(ClDetalleCompraE objCompra)
+        //{
+        //    string mensaje = string.Empty;
+        //    int result = 0;
+        //    return Json(new { data = result, mensaje = mensaje });
+        //}
 
         //Proveedores
         [HttpGet]
@@ -76,21 +76,21 @@ namespace capaEmpresa.Controllers
 
         }
 
-        [HttpPost]
-        public JsonResult MtdGuardarCorte(ClCorteE objCorte)
-        {
-            string mensaje = string.Empty;
-            int result = 0;
-            return Json(new { data = result, mensaje = mensaje });
-        }
+        //[HttpPost]
+        //public JsonResult MtdGuardarCorte(ClCorteE objCorte)
+        //{
+        //    string mensaje = string.Empty;
+        //    int result = 0;
+        //    return Json(new { data = result, mensaje = mensaje });
+        //}
 
-        [HttpPost]
-        public JsonResult MtdEliminarCorte(ClCorteE objCorte)
-        {
-            string mensaje = string.Empty;
-            int result = 0;
-            return Json(new { data = result, mensaje = mensaje });
-        }
+        //[HttpPost]
+        //public JsonResult MtdEliminarCorte(ClCorteE objCorte)
+        //{
+        //    string mensaje = string.Empty;
+        //    int result = 0;
+        //    return Json(new { data = result, mensaje = mensaje });
+        //}
 
 
         //Insumos
@@ -102,21 +102,31 @@ namespace capaEmpresa.Controllers
             return Json(new { data = lista, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
 
+        //[HttpPost]
+        //public JsonResult MtdGuardarInsumo(ClInsumoE objInsumo)
+        //{
+        //    string mensaje = string.Empty;
+        //    int result = 0;
+
+        //    return Json(new { data = result, mensaje = mensaje });
+        //}
+
+        //[HttpPost]
+        //public JsonResult MtdEliminarInsumos(ClInsumoE objInsumo)
+        //{
+        //    string mensaje = string.Empty;
+
+        //    return Json(new { data = objInsumo, mensaje = mensaje });
+        //}
+
+        //Materiales
         [HttpPost]
-        public JsonResult MtdGuardarInsumo(ClInsumoE objInsumo)
+        public JsonResult MtdGuardarMaterial(ClMaterialE objMaterial)
         {
             string mensaje = string.Empty;
-            int result = 0;
+            int result = new ClMaterialL().MtdGuardar(objMaterial, out mensaje);
 
             return Json(new { data = result, mensaje = mensaje });
-        }
-
-        [HttpPost]
-        public JsonResult MtdEliminarInsumos(ClInsumoE objInsumo)
-        {
-            string mensaje = string.Empty;
-
-            return Json(new { data = objInsumo, mensaje = mensaje });
         }
     }
 }

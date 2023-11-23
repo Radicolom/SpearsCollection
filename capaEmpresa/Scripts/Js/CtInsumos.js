@@ -3,6 +3,10 @@
     var todosDatos = [];
     var cargado = 0;
 
+    var objTablaPro = null;
+    var todosLosDatos = [];
+
+
     listarInsumo();
 
     function cargarAjax(ruta, tarea) {
@@ -25,7 +29,7 @@
 
     function cargarAjaxPost(ruta, datos, tarea) {
         $.ajax({
-            url: ruta,
+            url: "/DatoInsumo/" + ruta,
             type: "POST",
             data: datos,
             dataType: "json",
@@ -124,6 +128,130 @@
         }
     }
 
+    function guardado() {
+        Swal.fire({
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+            customClass: {
+                popup: 'bg-dark text-white',
+                content: 'text-white',
+                title: 'text-white'
+                // Puedes agregar más clases según sea necesario
+            }
+        });
+    }
+
+    function alerta(mensaje, tarea) {
+        Swal.fire({
+            title: "Advertencia",
+            text: `¿Estás seguro de que deseas ${mensaje}?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar",
+            customClass: {
+                popup: 'bg-dark text-white',
+                content: 'text-white',
+                title: 'text-white'
+                // Puedes agregar más clases según sea necesario
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (tarea) {
+                    tarea();
+                }
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                error("Se canceló");
+            }
+        });
+    }
+
+    function error(mensaje) {
+        Swal.fire({
+            title: mensaje,
+            icon: "error",
+            timer: 1500,
+            showConfirmButton: false,
+            customClass: {
+                popup: 'bg-dark text-white',
+                content: 'text-white',
+                title: 'text-white'
+                // Puedes agregar más clases según sea necesario
+            }
+        });
+    }
+
+    //Provedores
+    function crearTablaProvedores() {
+        cargarAjax('MtdListarProveedor', function (datos) {
+            todosLosDatos = datos;
+            if (datos != null) {
+                var dataSet = [];
+                var contar = 0;
+
+                datos.forEach(listarUsuarios);
+
+                function listarUsuarios(item, index) {
+
+                    var objBotones = {
+                        orderable: false,
+                        searchable: false,
+                        defaultContent: '<div class="btn-group">' +
+                            '<button id="btnProvedor" type="button" class="btn btn-primary"><i class="fas fa-hand-pointer"></i></button>' +
+                            '</div>'
+                    };
+                    contar++;
+
+                    dataSet.push([contar, item.documentoUsuario, item.nombreUsuario, item.apellidoUsuario, item.tellUsuario,
+                        (item.estadoUsuario ? '<span class="badge text-bg-success"><i>Activo</i></span>' : '<span class="badge text-bg-warning"><i>No Activo</i></span>'),
+                        objBotones.defaultContent
+
+                    ]);
+                }
+
+                armarTablaProveedores(dataSet);
+            }
+
+        });
+    }
+
+    function armarTablaProveedores(dataSet) {
+        if (objTablaPro != null) {
+            $("#tblProveedor").dataTable().fnDestroy();
+        }
+
+        objTablaPro = $("#tblProveedor").DataTable({
+            data: dataSet,
+            responsive: true,
+            ordering: false,
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json"
+            }
+        })
+    }
+
+    //proveedor
+
+    $("#btnProveedores").on("click", function () {
+
+        $("#MdProveedor").modal("show");
+        crearTablaProvedores();
+    });
+
+    $("#tblProveedor").on("click", "#btnProvedor", function () {
+        var indiceFila = objTablaPro.row($(this).closest("tr")).index();
+        var valorDeseado = todosLosDatos[indiceFila];
+        $("#MdProveedor").modal("hide");
+        $("#txtNumeroCompra").val(valorDeseado.idUsuario);
+
+    })
+
+
+
+
+
+
     $("#listaBusquedaMaterial").on("click", "#selecCionarBusquedaMaterial", function () {
         //relistaAnimal()
         let materialVal = $(this).first().attr('val');  // Obtener el valor usando .attr('val')
@@ -164,7 +292,31 @@
         $("#CntInsumos").fadeIn(1000);
 
     })
-    
+
+    //Material
+
+    $("#GuardarMaterial").on("click", function () {
+        $(".modal-body").LoadingOverlay("show");
+
+
+        var registro = {
+            nombreMaterial: $("#txtRegMaterial").val(),
+            descripcionMaterial: $("#txtRegDesInsumo").val()
+
+        };
+        alert(registro.nombreMaterial);
+        const datos = JSON.stringify({ objMaterial: registro });
+
+        cargarAjaxPost("MtdGuardarMaterial", datos, function (dato) {
+            if (dato.data == 1) {
+                guardado();
+            } else {
+                error(dato.mensaje);
+            }
+        })
+
+
+    });
 
 
 

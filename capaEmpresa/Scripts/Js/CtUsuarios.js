@@ -44,7 +44,7 @@
             console.error(er);
             error(er);
         }).always(function () {
-            $.LoadingOverlay("hide");
+            $(".modal-body").LoadingOverlay("hide");
         });
     }
 

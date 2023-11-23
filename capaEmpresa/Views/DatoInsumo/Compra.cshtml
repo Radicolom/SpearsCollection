@@ -9,11 +9,6 @@
     <li class="breadcrumb-item active">Compras</li>
 </ol>
 
-<button id="btnProveedores" type="button" class="btn btn-success">
-    <i class="fas fa-eye"></i>
-    Proveedores
-</button>
-
 <div class="card bg-dark text-white custom-card mb-4">
     <div class="card-header">
         <i class="fas fa-duotone fa-dolly"></i>
@@ -44,17 +39,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <i class="fas fa-cubes"></i>
-                        Proveedores
+                        <i class="fas fa-clipboard"></i>
+                        Detalle de la compra
                     </h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
+                        <div class="mb-3 text-center">
+                            <label for="text" class="form-label">N°:</label>
+                            <label for="text" class="form-label" id="numeroCompra"></label>
+                        </div>
                         <div class="col">
-                            <div class="mb-3">
-                                <label for="text" class="form-label">Documento:</label>
-                                <input type="text" class="form-control" id="txtDocumento" placeholder="Digite el documento" name="txtDocumento">
-                            </div>
+
                             <div class="mb-3">
                                 <label for="text" class="form-label">Nombres:</label>
                                 <input type="text" class="form-control" id="txtNombre" placeholder="Digite el nombre" name="txtNombre">
@@ -108,45 +104,7 @@
     </div>
 
 
-    <!--Tabla Proveedores -->
-    <div class="modal fade" id="MdProveedor" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        <i class="fas fa-cubes"></i>
-                        Proveedores
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col">
-                            <table id="tblProveedor" class="table table-dark table-striped display cell-border" style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Documento</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>tell</th>
-                                        <th>Estado</th>
-                                        <th>Seleccionar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+   
     @section scripts{
         <script src="~/Scripts/Js/CtCompra.js"></script>
     }
