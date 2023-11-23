@@ -437,6 +437,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Js\CtCompra.js" />
     <Content Include="Scripts\Js\CtCorte.js" />
+    <Content Include="Scripts\Js\CtProductos.js" />
     <Content Include="Scripts\Js\CtProveedores.js" />
     <Content Include="Scripts\Js\CtSatelite.js" />
     <Content Include="Scripts\Js\CtUsuarios.js" />
