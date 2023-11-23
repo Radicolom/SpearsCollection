@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewBag.Title = "Insumo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Empresa</a></li>
+    <li class="breadcrumb-item active">Insumos</li>
+</ol>
+
+<div class="container" id="CntInsumos">
+    <div class="row">
+        <div class="col sm-6">
+            <div class="input-group">
+                <span class="input-group-text">
+                    🔍
+                </span>
+                <select id="listaBusqueda" class="form-select">
+                    <!-- ARCHIVO -->
+                </select>
+            </div>
+        </div>
+        <div class="col sm-4">
+        </div>
+        <div class="col sm-2 mb-4" id="BtnEspecie">
+            <center>
+                <div class="btn-group">
+
+
+                </div>
+            </center>
+        </div>
+    </div>
+
+    <div class="card bg-dark text-white custom-card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-3">
+                    <button id="btnRegistrar" type="button" class="btn btn-outline-secondary">Registrar Insumo</button>
+                </div>
+                <div class="col-6">
+                    <center>
+                        <i class="fas fa-boxes"></i>
+                        Insumos
+                    </center>
+                </div>
+                <div class="col-3">
+                    <div class="btn-group">
+                        <button type="button" id="selecionarEs" class="btn btn-outline-secondary" data-bs-toggle="dropdown">Material</button>
+                        <div class="dropdown-menu" id="listaBusquedaMaterial">
+                            <!-- ARCHIVO -->
+                        </div>
+                        <button type="button" class="btn btn-secondary" id="NoFiltrar">Regresar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="CartasInsumo">
+
+            @* Cartas *@
+
+        </div>
+    </div>
+</div>
+
+
+@* DatosInsumos *@
+
+<div class="container mb-4" id="CntDatosInsumo" style="display: none;">
+    <div class="row">
+        <center>
+            <h1>
+                
+            </h1>
+        </center>
+        <br>
+        <div class="col">
+            <div class="card bg-dark text-white" style="width: 400px;">
+                <div class="card-header">
+                    <center>
+                        <i class="fas fa-file"></i>
+                        Datos insumo
+                    </center>
+                </div>
+                <div class="card-body">
+                    <center>
+                        <label for="text" class="form-label">Foto:</label>
+                        <br>
+                        <img id="fotoAnimal" src="#" alt="Vista previa de la foto" class="rounded-circle" style="width: 170px; height: 170px;">
+                    </center>
+                    <div class="mb-3 mt-3">
+                        <label for="text" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="txtNombre" name="txtNombre" disabled>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3 mt-3">
+                                <label for="text" class="form-label">Material:</label>
+                                <input type="text" class="form-control" id="txtMaterial" name="txtMaterial" disabled>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3 mt-3">
+                                <label for="text" class="form-label">Cantidad:</label>
+                                <input type="text" class="form-control" id="txtCantidad" name="txtCantidad" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <label for="comment">Descripcion Insumo:</label>
+                    <textarea class="form-control" rows="3" name="txtDesInsumo" id="txtDesInsumo" disabled></textarea>
+                    <label for="comment">Descripcion Material:</label>
+                    <textarea class="form-control" rows="3" name="txtDesMaterial" id="txtDesMaterial" disabled></textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col">
+            <div class="card text-white" style="margin: auto; width: 400px; background-color:#b46743a1;">
+                <div class="card-body">
+                    <center>
+                        <h1>PERSONA ENCARGADA</h1>
+                    </center>
+                    <div class="mb-3 mt-3">
+                        <label for="text" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreUsuarioDatos" placeholder="Escriba su nombre" name="nombre" disabled>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Correo:</label>
+                        <input type="email" class="form-control" id="correoUsuarioDatos" placeholder="Escriba un correo" name="correo" disabled>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="text" class="form-label">Ubicacion:</label>
+                        <input type="text" class="form-control" id="direccionUsuarioDatos" placeholder="Escriba dirección" name="direccion" disabled>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="number" class="form-label">Teléfono:</label>
+                        <input type="nymber" class="form-control" id="telefonoUsuarioDatos" placeholder="Escriba un número de télefono" name="telefono" disabled>
+                    </div>
+                </div>
+                <button class="btn-correo" id="enviar-correo">Enviar correo</button>
+
+                <button class="btn-whatsApp" id="whatsApp">WhatsApp</button>
+
+                <center>
+                    <button id="btnRegresar" type="button" class="btn-1">Regresar</button>
+                </center>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@* Registro *@
+
+<div class="modal fade" id="MdInsumos" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <i class="fas fa-pen-nib"></i>
+                    Registro Rol
+                </h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Nombre Rol:</label>
+                            <input type="text" class="form-control" id="txtRol" placeholder="Escriba el nombre" name="txtRol">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <center>
+                    <div class="col-8">
+                        <div id="alertaRol" class="alert alert-danger" role="alert" style="display: none">
+
+
+                        </div>
+                    </div>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button id="CancelarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="GuardarRol" type="button" class="btn btn-primary">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    <script src="~/Scripts/Js/Insumos.js"></script>
+}
