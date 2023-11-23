@@ -42,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClCiudadD.cs" />
+    <Compile Include="ClCompaD.cs" />
     <Compile Include="ClConexion.cs" />
+    <Compile Include="ClCortesD.cs" />
+    <Compile Include="ClInsumoD.cs" />
     <Compile Include="ClRolD.cs" />
     <Compile Include="ClUsuarioD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

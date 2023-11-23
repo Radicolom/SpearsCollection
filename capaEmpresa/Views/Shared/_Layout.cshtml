@@ -11,7 +11,11 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">Tienda</a>
+        <a class="navbar-brand ps-3" href="index.html">
+            <h1 class="navbar-brand-style">
+                SPEE<span>R</span>S
+            </h1>
+        </a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
@@ -41,7 +45,7 @@
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Resumen</div>
                         <a class="nav-link" href="@Url.Action("Index","Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-crow"></i></div>
                             Dashboard
                         </a>
                         <a class="nav-link" href="@Url.Action("Usuarios","Home")">
@@ -56,6 +60,23 @@
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
+
+                                <a class="nav-link" href="@Url.Action("Insumo","DatoInsumo")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
+                                    Insumos
+                                </a>
+                                <a class="nav-link" href="@Url.Action("Compra","DatoInsumo")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-dolly"></i></div>
+                                    Compras
+                                </a>
+                                <a class="nav-link" href="@Url.Action("cortes","DatoInsumo")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-drafting-compass"></i></div>
+                                    cortes
+                                </a>
+                                <a class="nav-link" href="@Url.Action("EntregasSatelite","DatoInsumo")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-calendar-day"></i></div>
+                                    Entregas Satelite
+                                </a>
                                 <a class="nav-link" href="layout-static.html">Static Navigation</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
                             </nav>
@@ -67,6 +88,18 @@
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link" href="@Url.Action("Categoria","Mantenedor")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    Categorias
+                                </a>
+                                <a class="nav-link" href="@Url.Action("Marca","Mantenedor")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-bookmark"></i></div>
+                                    Tipo Producto
+                                </a>
+                                <a class="nav-link" href="@Url.Action("Producto","Mantenedor")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-barcode"></i></div>
+                                    Productos
+                                </a>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                     Authentication
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -91,19 +124,16 @@
                                 </div>
                             </nav>
                         </div>
-                        <div class="sb-sidenav-menu-heading">Mantenimiento</div>
-                        <a class="nav-link" href="@Url.Action("Categoria","Mantenedor")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Categorias
+                        <div class="sb-sidenav-menu-heading">Equipo</div>
+                        <a class="nav-link" href="@Url.Action("Proveedores","Home")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-dice-d6"></i></div>
+                            Proveedores
                         </a>
-                        <a class="nav-link" href="@Url.Action("Marca","Mantenedor")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-bookmark"></i></div>
-                            Tipo Producto
+                        <a class="nav-link" href="@Url.Action("Satelites","Home")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-ruler-combined"></i></div>
+                            Satelites
                         </a>
-                        <a class="nav-link" href="@Url.Action("Producto","Mantenedor")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
-                            Productos
-                        </a>
+                        
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -114,7 +144,7 @@
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4">
+                <div class="container-fluid px-4 text-white">
 
                     @RenderBody()
 
@@ -125,7 +155,7 @@
 
                 </div>
             </main>
-            <footer class="py-4 bg-light mt-auto">
+            <footer class="py-4 bg-dark text-bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; Your Website 2023</div>

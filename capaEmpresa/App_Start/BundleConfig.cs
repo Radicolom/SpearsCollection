@@ -16,6 +16,8 @@ namespace capaEmpresa
                         "~/Scripts/fontawesome/all.min.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",
                         "~/Scripts/DataTables/dataTables.responsive.js",
+                        "~/Scripts/sweetalert2/sweetalert2.all.min.js",
+                        "~/Scripts/loadingoverlay/loadingoverlay.min.js",
                         "~/Scripts/scripts.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -31,6 +33,8 @@ namespace capaEmpresa
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css",
+                "~/Content/AdCss/custom-styles.css",
+                "~/Content/CssPro/Style.css",
                 "~/Content/DataTables/css/responsive.dataTables.css",
                 "~/Content/DataTables/css/jquery.dataTables.css"));
         }

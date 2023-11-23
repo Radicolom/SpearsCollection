@@ -10,9 +10,10 @@ namespace CapaDatos
 {
     public class ClRolD
     {
-        public List<ClRolE> MtdListar()
+        private ClConexion objConexion = new ClConexion();
+        public List<ClRolE> MtdListar(out string mensaje)
         {
-            ClConexion objConexion = new ClConexion();
+            mensaje = string.Empty;
             List<ClRolE> lista = new List<ClRolE>();
 
             try
@@ -29,23 +30,94 @@ namespace CapaDatos
                             lista.Add(new ClRolE()
                             {
                                 idRol = Convert.ToInt32(reader["idRol"]),
-                                nombreRol = reader["nombre"].ToString()
-                            }    
-                            );
+                                nombreRol = reader["nombreRol"].ToString()
+                            });
                         }
                     }
 
                 }
             }
-            catch (Exception)
+            catch (Exception exp)
             {
-
+                mensaje = exp.ToString();
                 throw;
             }
-
-            objConexion.MtdCerrarConex();
+            finally
+            {
+                objConexion.MtdCerrarConex();
+            }
 
             return lista;
         }
+
+        public int MtdGuardar(ClRolE objRol, out string mensaje)
+        {
+            mensaje = string.Empty;
+            int result = 0;
+            try
+            {
+                using (SqlConnection conexion = objConexion.MtdAbrirConex())
+                {
+
+                    SqlCommand cmd = new SqlCommand("SP_RegistrarRol", conexion);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@nombreRol", objRol.nombreRol);
+
+                    result = cmd.ExecuteNonQuery();
+
+                }
+            }
+            catch (Exception exp)
+            {
+                mensaje = exp.ToString();
+                throw;
+            }
+            finally
+            {
+                objConexion.MtdCerrarConex();
+            }
+
+            return result;
+        }
+
+        public int MtdEliminar(ClRolE objRol, out string mensaje)
+        {
+            mensaje = string.Empty;
+            int result = 0;
+            try
+            {
+                using (SqlConnection conexion = objConexion.MtdAbrirConex())
+                {
+                    SqlCommand cmd = new SqlCommand("SP_EliminarDato", conexion);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@tablaSeleccionada", "rol");
+                    cmd.Parameters.AddWithValue("@idDato", objRol.idRol);
+
+                    result = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception exp)
+            {
+                mensaje = exp.ToString();
+                throw;
+            }
+            finally
+            {
+                objConexion.MtdCerrarConex();
+            }
+            return result;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
