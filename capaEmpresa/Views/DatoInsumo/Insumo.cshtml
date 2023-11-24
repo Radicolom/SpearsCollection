@@ -36,16 +36,17 @@
     <div class="card bg-dark text-white custom-card mb-4">
         <div class="card-header">
             <div class="row">
-                <div class="col-3">
-                    <button id="btnRegistrar" type="button" class="btn btn-outline-secondary">Registrar Insumo</button>
+                <div class="col-4">
+                    <button id="btnRegistrarInsumo" type="button" class="btn btn-secondary">Registrar Compra</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-target="#MdMaterial" data-bs-toggle="modal">Registrar Material</button>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <center>
                         <i class="fas fa-boxes"></i>
                         Insumos
                     </center>
                 </div>
-                <div class="col-3">
+                <div class="col-4 d-flex justify-content-end">
                     <div class="btn-group">
                         <button type="button" id="selecionarEs" class="btn btn-outline-secondary" data-bs-toggle="dropdown">Material</button>
                         <div class="dropdown-menu" id="listaBusquedaMaterial">
@@ -71,7 +72,6 @@
     <div class="row">
         <center>
             <h1>
-                
             </h1>
         </center>
         <br>
@@ -107,7 +107,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <label for="comment">Descripcion Insumo:</label>
                     <textarea class="form-control" rows="3" name="txtDesInsumo" id="txtDesInsumo" disabled></textarea>
                     <label for="comment">Descripcion Material:</label>
@@ -157,21 +157,25 @@
 
 @* Registro *@
 
-<div class="modal fade" id="MdInsumos" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+<div class="modal fade" id="MdMaterial" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
                     <i class="fas fa-pen-nib"></i>
-                    Registro Rol
+                    Registro Material
                 </h5>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
                         <div class="mb-3">
-                            <label for="text" class="form-label">Nombre Rol:</label>
-                            <input type="text" class="form-control" id="txtRol" placeholder="Escriba el nombre" name="txtRol">
+                            <label for="text" class="form-label">Nombre material:</label>
+                            <input type="text" class="form-control" id="txtRegMaterial" placeholder="Escriba el nombre" name="txtRegMaterial">
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Descripcion material:</label>
+                            <textarea class="form-control" rows="4" name="txtRegDesInsumo" id="txtRegDesInsumo"></textarea>
                         </div>
                     </div>
                 </div>
@@ -179,7 +183,7 @@
             <div class="row">
                 <center>
                     <div class="col-8">
-                        <div id="alertaRol" class="alert alert-danger" role="alert" style="display: none">
+                        <div id="alertaMaterial" class="alert alert-danger" role="alert" style="display: none">
 
 
                         </div>
@@ -188,7 +192,7 @@
             </div>
             <div class="modal-footer">
                 <button id="CancelarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button id="GuardarRol" type="button" class="btn btn-primary">Agregar</button>
+                <button id="GuardarMaterial" type="button" class="btn btn-primary">Agregar</button>
             </div>
         </div>
     </div>
@@ -202,7 +206,6 @@
 
 
 
-
 @section scripts{
-    <script src="~/Scripts/Js/Insumos.js"></script>
+    <script src="~/Scripts/Js/CtInsumos.js"></script>
 }
