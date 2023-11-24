@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ecommerce.DTO\Ecommerce.DTO.csproj" />
+    <ProjectReference Include="..\Ecommerce.Model\Ecommerce.Modelo.csproj" />
+    <ProjectReference Include="..\Ecommerce.Utilidades\Ecommerce.Utilidades.csproj" />
+  </ItemGroup>
+
 </Project>
