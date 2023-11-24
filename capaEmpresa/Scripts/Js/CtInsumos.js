@@ -318,6 +318,13 @@
 
     });
 
+    $("#registroCompraInsumo").on("click", function () {
 
+        $("#CntInsumos").hide();
+        $("#CntRegistrarInsumo").show();
+
+
+
+    })
 
 })
