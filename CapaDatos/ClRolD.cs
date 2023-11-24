@@ -59,9 +59,10 @@ namespace CapaDatos
                 using (SqlConnection conexion = objConexion.MtdAbrirConex())
                 {
 
-                    SqlCommand cmd = new SqlCommand("SP_RegistrarRol", conexion);
+                    SqlCommand cmd = new SqlCommand("SP_RegistrarTabla", conexion);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@nombreRol", objRol.nombreRol);
+                    cmd.Parameters.AddWithValue("@nombreDato", objRol.nombreRol);
+                    cmd.Parameters.AddWithValue("@tablaSeleccionada", "rol");
 
                     result = cmd.ExecuteNonQuery();
 
