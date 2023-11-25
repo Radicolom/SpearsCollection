@@ -5,40 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 using Ecommerce.Modelo;
 using Ecommerce.Repositorio.Contrato;
-using Ecommerce.Repostorio.DBContext;
+using Ecommerce.Repositorio.DBContext;
 
 namespace Ecommerce.Repositorio.Implementacion
 {
-    public class VentaRepositorio :GenericoRepositorio<Venta>.IVentaReposotorio
+    public class VentaRepositorio : GenericoRepositorio<VentaEcommerce>.IVentaReposotorio
     {
         private readonly DbProyectoSpContext _dbContext;
         public VentaRepositorio(DbProyectoSpContext dbContext)
         {
-           _dbContext = dbContext;
+            _dbContext = dbContext;
         }
-        public async Task<Venta> Registrar(Venta modelo) 
+        public async Task<VentaEcommerce> Registrar(VentaEcommerce modelo)
         {
-          Venta ventaGenerada = new Venta();
-            using (var Traspaso = _dbContext.Database.BeginTransaction()) 
+            VentaEcommerce ventaGenerada = new VentaEcommerce();
+            using (var Traspaso = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                   foreach ( DetalleVenta dv in modelo.DetalleVenta)
-                   {
-                        Producto producto_encontrado = _dbContext.Productos.Where(pt => pt.IdProducto == dv.IdDetalleVenta).First();
+                    foreach (DetalleVentaEcommerce dv in modelo.DetalleVentaEcommerces)
+                    {
+                        ProductoEcommerce producto_encontrado = _dbContext.ProductoEcommerces.Where(pt => pt.IdProductoEcommerce == dv.IdProductoEcommerce).First();
 
-                        producto_encontrado.ProductoLocals = producto_encontrado.CantidadProductoLocal - dv.CantidadProductoVenta;
-                        _dbContext.Productos.Update(producto_encontrado);
-                   }
+                        producto_encontrado.Cantidad = producto_encontrado.Cantidad - dv.Cantidad;
+                        _dbContext.ProductoEcommerces.Update(producto_encontrado);
+                    }
                     await _dbContext.SaveChangesAsync();
-                    await _dbContext.Venta.AddAsync(modelo);
+                    await _dbContext.VentaEcommerces.AddAsync(modelo);
                     await _dbContext.SaveChangesAsync();
                     ventaGenerada = modelo;
                     Traspaso.Commit();
                 }
-                catch 
+                catch
                 {
-                 Traspaso.Rollback();
+                    Traspaso.Rollback();
                     throw;
                 }
             }
