@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ecommerce.Repositorio\Ecommerce.Repositorio.csproj" />
     <ProjectReference Include="..\Ecommerce.Servicio\Ecommerce.Servicio.csproj" />
   </ItemGroup>
 

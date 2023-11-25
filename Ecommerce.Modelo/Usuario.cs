@@ -41,5 +41,5 @@ public partial class Usuario
 
     public virtual ICollection<InsumoProvedor> InsumoProvedors { get; set; } = new List<InsumoProvedor>();
 
-    public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
+    public virtual ICollection<Ventum> Venta { get; set; } = new List<Ventum>();
 }

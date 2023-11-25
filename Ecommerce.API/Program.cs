@@ -1,4 +1,5 @@
-using Ecommerce.Repostorio.DBContext;
+
+using Ecommerce.Repositorio.DBContext;
 using Microsoft.EntityFrameworkCore;
 
 using Ecommerce.Repositorio.Contrato;
