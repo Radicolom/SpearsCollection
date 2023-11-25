@@ -71,7 +71,7 @@
                     contar++;
 
                     dataSet.push([contar, item.objCompra.numeroCompra, item.objCompra.fechaCompra,
-                        (item.objCompra.estadoCompra ? '<span class="badge text-bg-success"><i>Activo</i></span>' : '<span class="badge text-bg-warning"><i>No Activo</i></span>'),
+                        (item.objCompra.estadoCompra ? '<span class="badge text-bg-success"><i>Pago</i></span>' : '<span class="badge text-bg-warning"><i>Pendiente</i></span>'),
                         item.objCompra.objProveedor.nombreUsuario,
                         objBotones.defaultContent
                     ]);
@@ -98,12 +98,36 @@
         })
     }
 
+    function listarProveedror() {
+        return new Promise(function (resolve) {
+            cargarAjax("MtdListarProveedor", function (datos) {
+                if (datos) {
+                    const selectProveedor = $("#btsProveedor");
+                    selectProveedor.empty();
+                    selectProveedor.append("<option disabled selected value='0'>Seleccione un proveedor</option>");
+                    datos.forEach(function (item) {
+                        selectProveedor.append("<option value=" + item.idUsuario + ">" + item.nombreUsuario + " " + item.apellidoUsuario + "</option>");
+                    });
+                    resolve();
+                }
+            })
+        })
+    }
+
+
+
     //compras
-    $("#tablaCompras").on("click", "#btnDatos", function () {
+    $("#tablaCompras").on("click", "#btnDatos", async function () {
         var indiceFila = objTablaCom.row($(this).closest("tr")).index();
         var valores = todosDatosCom[indiceFila];
-
+        await listarProveedror();
         $("#numeroCompra").html(valores.objCompra.numeroCompra);
+        $("#txtFechaCompra").val(valores.objCompra.fechaCompra);
+        $("#btsProveedor").val(valores.objCompra.objProveedor.idUsuario);
+        $("#txtTell").val(valores.objCompra.objProveedor.tellUsuario);
+        $("#txtInsumo").val(valores.objInsumo.nombreInsumo + " - " + valores.objInsumo.objMaterial.nombreMaterial);
+        $("#txtCantidad").val(valores.cantidadCompra);
+        $("#txtPrecio").val(valores.precioCompra);
 
 
         console.log(valores)

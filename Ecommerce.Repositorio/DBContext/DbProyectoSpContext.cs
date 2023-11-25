@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Ecommerce.Modelo;
 using Microsoft.EntityFrameworkCore;
 
-namespace Ecommerce.Repostorio.DBContext;
+namespace Ecommerce.Repositorio.DBContext;
 
 public partial class DbProyectoSpContext : DbContext
 {
@@ -15,6 +15,8 @@ public partial class DbProyectoSpContext : DbContext
         : base(options)
     {
     }
+
+    public virtual DbSet<CategoriaEcommerce> CategoriaEcommerces { get; set; }
 
     public virtual DbSet<Categoria> Categoria { get; set; }
 
@@ -29,6 +31,8 @@ public partial class DbProyectoSpContext : DbContext
     public virtual DbSet<Departamento> Departamentos { get; set; }
 
     public virtual DbSet<DetalleCompra> DetalleCompras { get; set; }
+
+    public virtual DbSet<DetalleVentaEcommerce> DetalleVentaEcommerces { get; set; }
 
     public virtual DbSet<DetalleVenta> DetalleVenta { get; set; }
 
@@ -48,6 +52,8 @@ public partial class DbProyectoSpContext : DbContext
 
     public virtual DbSet<Producto> Productos { get; set; }
 
+    public virtual DbSet<ProductoEcommerce> ProductoEcommerces { get; set; }
+
     public virtual DbSet<ProductoLocal> ProductoLocals { get; set; }
 
     public virtual DbSet<Provedor> Provedors { get; set; }
@@ -58,12 +64,30 @@ public partial class DbProyectoSpContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
-    public virtual DbSet<Venta> Venta { get; set; }
+    public virtual DbSet<UsuarioEcommerce> UsuarioEcommerces { get; set; }
+
+    public virtual DbSet<VentaEcommerce> VentaEcommerces { get; set; }
+
+    public virtual DbSet<Ventum> Venta { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<CategoriaEcommerce>(entity =>
+        {
+            entity.HasKey(e => e.IdCategoriaEcommerce).HasName("PK__Categori__4CB4ADA2B38B5085");
+
+            entity.ToTable("CategoriaEcommerce");
+
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Categoria>(entity =>
         {
             entity.HasKey(e => e.IdCategoria).HasName("PK__categori__8A3D240C03509181");
@@ -210,6 +234,23 @@ public partial class DbProyectoSpContext : DbContext
             entity.HasOne(d => d.IdInsumoNavigation).WithMany(p => p.DetalleCompras)
                 .HasForeignKey(d => d.IdInsumo)
                 .HasConstraintName("FK__detalleCo__idIns__6E01572D");
+        });
+
+        modelBuilder.Entity<DetalleVentaEcommerce>(entity =>
+        {
+            entity.HasKey(e => e.IdDetalleVentaE).HasName("PK__DetalleV__077CAA970771BF8A");
+
+            entity.ToTable("DetalleVentaEcommerce");
+
+            entity.Property(e => e.Total).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.IdProductoEcommerceNavigation).WithMany(p => p.DetalleVentaEcommerces)
+                .HasForeignKey(d => d.IdProductoEcommerce)
+                .HasConstraintName("FK__DetalleVe__IdPro__37703C52");
+
+            entity.HasOne(d => d.IdVentaEcommerceNavigation).WithMany(p => p.DetalleVentaEcommerces)
+                .HasForeignKey(d => d.IdVentaEcommerce)
+                .HasConstraintName("FK__DetalleVe__IdVen__367C1819");
         });
 
         modelBuilder.Entity<DetalleVenta>(entity =>
@@ -424,6 +465,30 @@ public partial class DbProyectoSpContext : DbContext
                 .HasConstraintName("FK__producto__idMate__5535A963");
         });
 
+        modelBuilder.Entity<ProductoEcommerce>(entity =>
+        {
+            entity.HasKey(e => e.IdProductoEcommerce).HasName("PK__Producto__554244E409D899A2");
+
+            entity.ToTable("ProductoEcommerce");
+
+            entity.Property(e => e.Descripcion)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Imagen).IsUnicode(false);
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Precio).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.PrecioOferta).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.IdCategoriaEcommerceNavigation).WithMany(p => p.ProductoEcommerces)
+                .HasForeignKey(d => d.IdCategoriaEcommerce)
+                .HasConstraintName("FK__ProductoE__IdCat__2BFE89A6");
+        });
+
         modelBuilder.Entity<ProductoLocal>(entity =>
         {
             entity.HasKey(e => e.IdProductoLocal).HasName("PK__producto__98E424DE0005F52C");
@@ -553,7 +618,46 @@ public partial class DbProyectoSpContext : DbContext
                 .HasConstraintName("FK__usuario__idRol__4316F928");
         });
 
-        modelBuilder.Entity<Venta>(entity =>
+        modelBuilder.Entity<UsuarioEcommerce>(entity =>
+        {
+            entity.HasKey(e => e.IdUsuarioE).HasName("PK__UsuarioE__EAEBAD7D5B4ED579");
+
+            entity.ToTable("UsuarioEcommerce");
+
+            entity.Property(e => e.Clave)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Correo)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.NombreCompleto)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Rol)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<VentaEcommerce>(entity =>
+        {
+            entity.HasKey(e => e.IdVentaE).HasName("PK__VentaEco__FF40C749ACE7CC1E");
+
+            entity.ToTable("VentaEcommerce");
+
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Total).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.IdUsuarioENavigation).WithMany(p => p.VentaEcommerces)
+                .HasForeignKey(d => d.IdUsuarioE)
+                .HasConstraintName("FK__VentaEcom__IdUsu__32AB8735");
+        });
+
+        modelBuilder.Entity<Ventum>(entity =>
         {
             entity.HasKey(e => e.IdVenta).HasName("PK__venta__077D5614A616F166");
 

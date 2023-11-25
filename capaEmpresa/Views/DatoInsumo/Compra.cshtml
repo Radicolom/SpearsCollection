@@ -46,55 +46,56 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="mb-3 text-center">
-                            <label for="text" class="form-label">N°:</label>
-                            <label for="text" class="form-label" id="numeroCompra"></label>
+                            <h4>
+                                <label for="text" class="form-label">N°:</label>
+                                <label for="text" class="form-label" id="numeroCompra"></label>
+                            </h4>
                         </div>
-                        <div class="col">
+                        <div class="col-3">
 
                             <div class="mb-3">
-                                <label for="text" class="form-label">Nombres:</label>
-                                <input type="text" class="form-control" id="txtNombre" placeholder="Digite el nombre" name="txtNombre">
-                            </div>
-                            <div class="mb-3">
-                                <label for="text" class="form-label">Apellidos:</label>
-                                <input type="text" class="form-control" id="txtApellido" placeholder="Digite los apellidos" name="txtApellido">
-                            </div>
-                            <div class="mb-3">
-                                <label for="text" class="form-label">Telefono:</label>
-                                <input type="text" class="form-control" id="txtTell" placeholder="Digite los apellidos" name="txtTell">
+                                <label for="text" class="form-label">Fecha de Compra:</label>
+                                <input type="text" class="form-control" id="txtFechaCompra" name="txtFechaCompra" disabled>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6">
                             <div class="mb-3">
-                                <label for="email" class="form-label">Correo:</label>
-                                <input type="email" class="form-control" id="txtCorreo" placeholder="Digite el correo" name="txtCorreo">
-                            </div>
-                            <div class="mb-3">
-                                <label for="text" class="form-label">Direccion:</label>
-                                <input type="text" class="form-control" id="txtDireccion" placeholder="Digite el correo" name="txtDireccion">
-                            </div>
-                            <div class="mb-3">
-                                <label for="text" class="form-label">Estado:</label>
-                                <select id="btsEstado" class="form-select" aria-label="Default select example">
-                                    <option disabled>Seleccione una opcion</option>
-                                    <option value="0">Activo</option>
-                                    <option value="1">No activo</option>
+                                <label for="text" class="form-label">Proveedor:</label>
+                                <select id="btsProveedor" class="form-select" aria-label="Default select example" disabled>
+
+                                    <!-- Archivo -->
+
                                 </select>
                             </div>
+                        </div>
+                        <div class="col-3">
                             <div class="mb-3">
-                                <label for="text" class="form-label">Tipo Usuario:</label>
-                                <select id="btsTipoUsuario" class="form-select" aria-label="Default select example">
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="text" class="form-label">Ciudad:</label>
-                                <select id="btsCiudad" class="form-select" aria-label="Default select example">
-                                </select>
+                                <label for="text" class="form-label">Telefono:</label>
+                                <input type="text" class="form-control" id="txtTell" name="txtTell" disabled>
                             </div>
                         </div>
                     </div>
 
-
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Insumo:</label>
+                                <input type="text" class="form-control" id="txtInsumo" name="txtInsumo" disabled>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Cantidad:</label>
+                                <input type="number" class="form-control" id="txtCantidad" name="txtCantidad" disabled>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="mb-3">
+                                <label for="text" class="form-label">Precio:</label>
+                                <input type="number" class="form-control" id="txtPrecio" name="txtPrecio" disabled>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>

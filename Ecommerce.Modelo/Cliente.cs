@@ -25,5 +25,5 @@ public partial class Cliente
 
     public virtual Ciudad? IdCiudadNavigation { get; set; }
 
-    public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
+    public virtual ICollection<Ventum> Venta { get; set; } = new List<Ventum>();
 }
