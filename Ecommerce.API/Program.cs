@@ -1,4 +1,5 @@
-using Ecommerce.Repostorio.DBContext;
+
+using Ecommerce.Repositorio.DBContext;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

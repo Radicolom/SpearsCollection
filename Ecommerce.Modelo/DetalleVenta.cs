@@ -17,5 +17,5 @@ public partial class DetalleVenta
 
     public virtual ProductoLocal? IdProductoLocalNavigation { get; set; }
 
-    public virtual Venta? IdVentaNavigation { get; set; }
+    public virtual Ventum? IdVentaNavigation { get; set; }
 }

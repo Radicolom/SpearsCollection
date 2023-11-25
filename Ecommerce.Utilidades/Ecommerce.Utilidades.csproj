@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ecommerce.DTO\Ecommerce.DTO.csproj" />
-    <ProjectReference Include="..\Ecommerce.Model\Ecommerce.Modelo.csproj" />
+    <ProjectReference Include="..\Ecommerce.Modelo\Ecommerce.Modelo.csproj" />
   </ItemGroup>
 
 </Project>
