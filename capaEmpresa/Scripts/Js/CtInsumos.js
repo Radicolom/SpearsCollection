@@ -89,6 +89,17 @@
         })
     }
 
+    function armarCartas(dataSet) {
+        //debugger;
+        var objCarta = $("#CartasInsumo");
+
+        if (objCarta != null) {
+            objCarta.empty();
+        }
+
+        objCarta.html(dataSet.join(''));
+    }
+
     function obtenerIdMaterialPorNombre(nombreMaterial, data) {
         // Función para obtener el idMaterial correspondiente a un nombre de material
         var idMaterial = null;
@@ -99,17 +110,6 @@
             }
         }
         return idMaterial;
-    }
-
-    function armarCartas(dataSet) {
-        //debugger;
-        var objCarta = $("#CartasInsumo");
-
-        if (objCarta != null) {
-            objCarta.empty();
-        }
-
-        objCarta.html(dataSet.join(''));
     }
 
     function filtrar(valoresColeccion, comparaTipo, atributos) {
@@ -183,69 +183,39 @@
     }
 
     //Provedores
-    function crearTablaProvedores() {
-        cargarAjax('MtdListarProveedor', function (datos) {
-            todosLosDatos = datos;
-            if (datos != null) {
-                var dataSet = [];
-                var contar = 0;
-
-                datos.forEach(listarUsuarios);
-
-                function listarUsuarios(item, index) {
-
-                    var objBotones = {
-                        orderable: false,
-                        searchable: false,
-                        defaultContent: '<div class="btn-group">' +
-                            '<button id="btnProvedor" type="button" class="btn btn-primary"><i class="fas fa-hand-pointer"></i></button>' +
-                            '</div>'
-                    };
-                    contar++;
-
-                    dataSet.push([contar, item.documentoUsuario, item.nombreUsuario, item.apellidoUsuario, item.tellUsuario,
-                        (item.estadoUsuario ? '<span class="badge text-bg-success"><i>Activo</i></span>' : '<span class="badge text-bg-warning"><i>No Activo</i></span>'),
-                        objBotones.defaultContent
-
-                    ]);
+    function listarProveedor() {
+        return new Promise(function (resolve) {
+            cargarAjax("MtdListarProveedor", function (datos) {
+                if (datos) {
+                    const selectProveedor = $("#btsProveedor");
+                    selectProveedor.empty();
+                    selectProveedor.append("<option disabled selected value='0'>Seleccione un proveedor</option>");
+                    datos.forEach(function (item) {
+                        selectProveedor.append("<option value=" + item.idUsuario + ">" + item.nombreUsuario + " " + item.apellidoUsuario + "</option>");
+                    });
+                    resolve();
                 }
-
-                armarTablaProveedores(dataSet);
-            }
-
-        });
-    }
-
-    function armarTablaProveedores(dataSet) {
-        if (objTablaPro != null) {
-            $("#tblProveedor").dataTable().fnDestroy();
-        }
-
-        objTablaPro = $("#tblProveedor").DataTable({
-            data: dataSet,
-            responsive: true,
-            ordering: false,
-            language: {
-                url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json"
-            }
+            })
         })
     }
 
-    //proveedor
+    //Satelite
 
-    $("#btnProveedores").on("click", function () {
-
-        $("#MdProveedor").modal("show");
-        crearTablaProvedores();
-    });
-
-    $("#tblProveedor").on("click", "#btnProvedor", function () {
-        var indiceFila = objTablaPro.row($(this).closest("tr")).index();
-        var valorDeseado = todosLosDatos[indiceFila];
-        $("#MdProveedor").modal("hide");
-        $("#txtNumeroCompra").val(valorDeseado.idUsuario);
-
-    })
+    function listarSatelite() {
+        return new Promise(function (resolve) {
+            cargarAjax("MtdListarSatelite", function (datos) {
+                if (datos) {
+                    const selectProveedor = $("#btsSatelite");
+                    selectProveedor.empty();
+                    selectProveedor.append("<option disabled selected value='0'>Seleccione un satelite</option>");
+                    datos.forEach(function (item) {
+                        selectProveedor.append("<option value=" + item.idUsuario + ">" + item.nombreUsuario + " " + item.apellidoUsuario + "</option>");
+                    });
+                    resolve();
+                }
+            })
+        })
+    }
 
 
 
@@ -270,13 +240,14 @@
 
     //datos
 
-    $("#CartasInsumo").on("click", "#btnInsumo", function () {
+    $("#CartasInsumo").on("click", "#btnInsumo", async function () {
         
         // Obtener la posición del botón en relación con sus elementos hermanos
         var posicion = $(this).data('indice');
         var datos = todosDatos[posicion];
         $("#CntInsumos").hide();
         $("#CntDatosInsumo").fadeIn(1000);
+        await listarSatelite();
 
         $("#txtNombre").val(datos.nombreInsumo);
         $("#txtMaterial").val(datos.objMaterial.nombreMaterial);
@@ -289,6 +260,12 @@
     $("#btnRegresar").on("click", function () {
         console.log("sd")
         $("#CntDatosInsumo").hide();
+        $("#CntInsumos").fadeIn(1000);
+
+    })
+    $("#btnRegresar2").on("click", function () {
+        console.log("sd")
+        $("#CntRegistrarInsumo").hide();
         $("#CntInsumos").fadeIn(1000);
 
     })
@@ -318,10 +295,13 @@
 
     });
 
-    $("#registroCompraInsumo").on("click", function () {
+    $("#registroCompraInsumo").on("click", async function () {
 
         $("#CntInsumos").hide();
-        $("#CntRegistrarInsumo").show();
+        $("#CntRegistrarInsumo").fadeIn(1000);
+
+        await listarProveedor();
+
 
 
 

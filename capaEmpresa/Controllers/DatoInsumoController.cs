@@ -65,6 +65,18 @@ namespace capaEmpresa.Controllers
             return Json(new { data = objLista }, JsonRequestBehavior.AllowGet);
         }
 
+
+        //Satelite
+        [HttpGet]
+        public JsonResult MtdListarSatelite()
+        {
+            List<ClUsuarioE> objLista = new List<ClUsuarioE>();
+            objLista = new ClSateliteL().MtdListar();
+
+            return Json(new { data = objLista }, JsonRequestBehavior.AllowGet);
+        }
+
+
         //Cortes
         [HttpGet]
         public JsonResult MtdListarCorte()
@@ -127,4 +139,7 @@ namespace capaEmpresa.Controllers
             return Json(new { data = result, mensaje = mensaje });
         }
     }
+
+
+
 }
