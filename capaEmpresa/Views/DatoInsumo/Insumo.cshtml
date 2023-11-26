@@ -69,13 +69,8 @@
 
 <div class="container mb-4" id="CntDatosInsumo" style="display: none;">
     <div class="row">
-        <center>
-            <h1>
-            </h1>
-        </center>
-        <br>
-        <div class="col">
-            <div class="card bg-dark text-white" style="width: 400px;">
+        <div class="col-8">
+            <div class="card bg-dark text-white">
                 <div class="card-header">
                     <center>
                         <i class="fas fa-file"></i>
@@ -83,49 +78,61 @@
                     </center>
                 </div>
                 <div class="card-body">
-                    <center>
-                        <label for="text" class="form-label">Foto:</label>
-                        <br>
-                        <img id="fotoAnimal" src="#" alt="Vista previa de la foto" class="rounded-circle" style="width: 170px; height: 170px;">
-                    </center>
-                    <div class="mb-3 mt-3">
-                        <label for="text" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="txtNombre" name="txtNombre" disabled>
-                    </div>
                     <div class="row">
-                        <div class="col">
-                            <div class="mb-3 mt-3">
-                                <label for="text" class="form-label">Material:</label>
-                                <input type="text" class="form-control" id="txtMaterial" name="txtMaterial" disabled>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3 mt-3">
+                        <div class="col-3">
+                            <center>
+                                <label for="text" class="form-label">Foto:</label>
+                                <br>
+                                <img id="fotoAnimal" src="#" alt="Vista previa de la foto" class="rounded-circle" style="width: 170px; height: 170px;">
+                            </center>
+                            <div class="mb-5 mt-5 text-center">
                                 <label for="text" class="form-label">Cantidad:</label>
                                 <input type="text" class="form-control" id="txtCantidad" name="txtCantidad" disabled>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="mb-2 mt-2">
+                                        <label for="text" class="form-label">Nombre:</label>
+                                        <input type="text" class="form-control" id="txtNombre" name="txtNombre" disabled>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-2 mt-2">
+                                        <label for="text" class="form-label">Material:</label>
+                                        <input type="text" class="form-control" id="txtMaterial" name="txtMaterial" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
 
-                    <label for="comment">Descripcion Insumo:</label>
-                    <textarea class="form-control" rows="3" name="txtDesInsumo" id="txtDesInsumo" disabled></textarea>
-                    <label for="comment">Descripcion Material:</label>
-                    <textarea class="form-control" rows="3" name="txtDesMaterial" id="txtDesMaterial" disabled></textarea>
+                                <div class="col">
+
+                                </div>
+                            </div>
+
+                            <label for="comment">Descripcion Insumo:</label>
+                            <textarea class="form-control" rows="3" name="txtDesInsumo" id="txtDesInsumo" disabled></textarea>
+                            <label for="comment">Descripcion Material:</label>
+                            <textarea class="form-control" rows="3" name="txtDesMaterial" id="txtDesMaterial" disabled></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
 
-        <div class="col">
-            <div class="card text-white" style="margin: auto; width: 400px; background-color:#b46743a1;">
-                <div class="card-body">
+        <div class="col-4">
+            <div class="card bg-dark text-white">
+                <div class="card-header">
                     <center>
-                        <h1>PERSONA ENCARGADA</h1>
+                        <i class="fas fa-address-book"></i>
+                        Satelite encargado
                     </center>
-                    <div class="mb-3 mt-3">
-                        <label for="text" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nombreUsuarioDatos" placeholder="Escriba su nombre" name="nombre" disabled>
-                    </div>
+                </div>
+                <div class="card-body">
+
                     <div class="col-8">
                         <div class="mb-3 mt-3">
                             <label for="text" class="form-label">Satelite:</label>
@@ -136,31 +143,33 @@
                             </select>
                         </div>
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="email" class="form-label">Correo:</label>
-                        <input type="email" class="form-control" id="correoUsuarioDatos" placeholder="Escriba un correo" name="correo" disabled>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-2 mt-2">
+                                <label for="text" class="form-label">Cantidad:</label>
+                                <input type="number" class="form-control" id="txtCantidadSatelite" placeholder="Cantidad" name="txtCantidadSatelite">
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="mb-2 mt-2">
+                                <label for="text" class="form-label">Estado:</label>
+                                <select id="btsSatelite" class="form-select" aria-label="Default select example">
+                                    <option disabled selected>Seleccione un estado</option>
+                                    <option value='0'>Por entregar</option>
+                                    <option value='1'>Entregado</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="text" class="form-label">Ubicacion:</label>
-                        <input type="text" class="form-control" id="direccionUsuarioDatos" placeholder="Escriba dirección" name="direccion" disabled>
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="number" class="form-label">Teléfono:</label>
-                        <input type="nymber" class="form-control" id="telefonoUsuarioDatos" placeholder="Escriba un número de télefono" name="telefono" disabled>
-                    </div>
+                    <center>
+                        <div class="btn-group mb-2">
+                            <button id="btnRegresar" type="button" class="btn btn-dark">Regresar</button>
+                            <button id="btnRegresar" type="button" class="btn btn-dark">Guardar Envio</button>
+                        </div>
+                    </center>
                 </div>
-                <button class="btn-correo" id="enviar-correo">Enviar correo</button>
-
-                <button class="btn-whatsApp" id="whatsApp">WhatsApp</button>
-
-                <center>
-                    <button id="btnRegresar" type="button" class="btn-1">Regresar</button>
-                </center>
-
-
             </div>
         </div>
-
     </div>
 </div>
 
@@ -171,10 +180,8 @@
         <div class="row">
             <div class="card-header">
                 <center>
-                    <h1>
-                        <i class="fas fa-file"></i>
-                        Registro factura
-                    </h1>
+                    <i class="fas fa-file"></i>
+                    Registro factura
                 </center>
             </div>
 
@@ -194,8 +201,8 @@
                     <button id="pdfbt" type="button" class="btn-1">Descargar PDF</button>
                 </center>
                 <center>
-                    <div class="btn-group dropend" role="group">
-                        <button id="btnRegresar2" type="button" class="btn btn-info">Regresar</button>
+                    <div class="btn-group dropend mb-2 mt-2" role="group">
+                        <button id="btnRegresar2" type="button" class="btn btn-warning">Regresar</button>
                         <button id="btnGuardarFactura" type="button" class="btn btn-success">Guardar</button>
                     </div>
                 </center>
@@ -204,13 +211,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-8">
-                            <div class="mb-2 mt-3 text-center">
+                            <div class="mb-2 mt-2 text-center">
                                 <label for="text" class="form-label">N° Compra:</label>
                                 <input type="text" class="form-control" id="txtNumeroCompra" name="txtNumeroCompra">
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="mb-2 mt-3">
+                            <div class="mb-2 mt-2">
                                 <label for="text" class="form-label">Estado:</label>
                                 <select id="btsEstado" class="form-select" aria-label="Default select example">
                                     <option disabled>Seleccione una opcion</option>
@@ -220,10 +227,10 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-8">
-                            <div class="mb-3 mt-3">
+                            <div class="mb-2 mt-2">
                                 <label for="text" class="form-label">Proveedor:</label>
                                 <select id="btsProveedor" class="form-select" aria-label="Default select example">
 
@@ -233,7 +240,7 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="mb-3 mt-3">
+                            <div class="mb-2 mt-2">
                                 <label for="text" class="form-label">Cantidad:</label>
                                 <input type="number" class="form-control" id="txtCantidad" name="txtCantidad">
                             </div>
@@ -242,25 +249,25 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="mb-3 mt-3">
+                            <div class="mb-2 mt-2">
                                 <label for="text" class="form-label">Nombre Insumo:</label>
                                 <input type="text" list="listaRegistroInsumo" name="browser" class="form-control" placeholder="Escriba el insumo" id="InsumoRegistro">
                                 <datalist id="listaRegistroInsumo">
                                     <!-- ARCHIVO -->
                                 </datalist>
                             </div>
-                            <div class="mb-3 mt-3">
+                            <div class="mb-2 mt-2">
                                 <label for="text" class="form-label">Precio Compra:</label>
                                 <input type="number" class="form-control" id="txtPrecio" name="txtPrecio">
                             </div>
                         </div>
                         <div class="col">
-                            <div class="mb-3 mt-3">
+                            <div class="mb-2 mt-2">
                                 <label for="text" class="form-label">Descripción Insumo:</label>
                                 <textarea class="form-control" rows="5" name="datoDescripciónAnimal" id="datoDescripciónAnimal" disabled></textarea>
                             </div>
                         </div>
-                    
+
                     </div>
 
                 </div>
