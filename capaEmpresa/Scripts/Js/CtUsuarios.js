@@ -104,51 +104,59 @@
     }
 
     function listarCiudad(lugar) {
-        cargarAjax('/Home/MtdListarCiudad', function (data) {
-            switch (lugar) {
-                case "modal":
-                    if (lugar) {
-                        const selectRol = $("#btsCiudad");
-                        selectRol.empty();
-                        selectRol.append("<option disabled selected value='0'>Seleccione una ciudad</option>");
-                        data.forEach(function (item) {
-                            selectRol.append("<option value=" + item.idCiudad + ">" + item.nombreCiudad + "</option>");
-                        });
-                    }
-                    break;
-            }
+        return new Promise(function (resolve) {
+            cargarAjax('/Home/MtdListarCiudad', function (data) {
+                switch (lugar) {
+                    case "modal":
+                        if (lugar) {
+                            const selectRol = $("#btsCiudad");
+                            selectRol.empty();
+                            selectRol.append("<option disabled selected value='0'>Seleccione una ciudad</option>");
+                            data.forEach(function (item) {
+                                selectRol.append("<option value=" + item.idCiudad + ">" + item.nombreCiudad + "</option>");
+                            });
+                        }
+                        break;
+                }
+            });
+            resolve();
         });
     }
 
     function listarRol(lugar) {
-        cargarAjax('/Home/MtdListarRol', function (data) {
-            switch (lugar) {
-                case lugar:
-                    const listaRoles = $("#listaRoles");
-                    listaRoles.empty();
-                    data.forEach(function (item) {
-                        listaRoles.append("<li><a class='dropdown-item' data-id='" + item.idRol + "'>" + item.nombreRol + "</a></li>");
-                    });
-                case "modal":
-                    if (lugar) {
-                        const selectRol = $("#btsTipoUsuario");
-                        selectRol.empty();
-                        selectRol.append("<option disabled selected value='0'>Seleccione un puesto</option>");
+        return new Promise(function (resolve) {
+            cargarAjax('/Home/MtdListarRol', function (data) {
+                switch (lugar) {
+                    case "modal":
+                        if (lugar) {
+                            const selectRol = $("#btsTipoUsuario");
+                            selectRol.empty();
+                            selectRol.append("<option disabled selected value='0'>Seleccione un puesto</option>");
+                            data.forEach(function (item) {
+                                selectRol.append("<option value=" + item.idRol + ">" + item.nombreRol + "</option>");
+                            });
+                        }   
+                        break;
+                    case lugar:
+                        const listaRoles = $("#listaRoles");
+                        listaRoles.empty();
                         data.forEach(function (item) {
-                            selectRol.append("<option value=" + item.idRol + ">" + item.nombreRol + "</option>");
+                            listaRoles.append("<li><a class='dropdown-item' data-id='" + item.idRol + "'>" + item.nombreRol + "</a></li>");
                         });
-                    }
-                    break;
-            }
+                        break;
+                }
+                resolve();
+            });
         });
     }
 
-    function abrirModal() {
+    async function abrirModal() {
+
+        await listarCiudad("modal");
+        await listarRol("modal");
 
         $("#formModal").modal("show");
 
-        listarRol("modal");
-        listarCiudad("modal");
 
         $("#txtDocumento").val("");
         $("#txtNombre").val("");
@@ -156,9 +164,9 @@
         $("#txtTell").val("")
         $("#txtCorreo").val("")
         $("#txtDireccion").val("")
-        $("#btsEstado").val("")
-        $("#btsTipoUsuario").val("")
-        $("#btsCiudad").val("")
+        $("#btsEstado").val(0)
+        $("#btsTipoUsuario").val(0)
+        $("#btsCiudad").val(0)
 
     }
 
@@ -223,16 +231,16 @@
 
 
     //usuarios
-    $("#btnRegistrar").on("click", function () {
-        abrirModal();
+    $("#btnRegistrar").on("click", async function () {
+        await abrirModal();
         $(".modal-title").html('<i class="fas fa-user-plus"></i> Agregar Usuario');
     });
 
-    $("#tablaUsuarios").on("click", "#btnEditar", function () {
+    $("#tablaUsuarios").on("click", "#btnEditar", async function () {
         var fila = objTabla.row($(this).closest("tr")).index();
         var data = todosLosDatos[fila];
 
-        abrirModal();
+        await abrirModal();
 
         $(".modal-title").html('<i class="fas fa-user"></i><i class="fas fa-pen fa-xs"></i> EditarUsuario');
         $("#txtDocumento").val(data.documentoUsuario);
@@ -245,6 +253,7 @@
         $("#btsTipoUsuario").val(data.objRol.idRol);
         $("#btsCiudad").val(data.objCiudad.idCiudad);
         cargado = data.idUsuario;
+
     });
 
     $("#tablaUsuarios").on("click", "#btnEliminar", function () {
@@ -339,7 +348,7 @@
         }
 
         const datos = JSON.stringify({ objRol: dato });
-                
+
         alerta("eliminar el Rol", function () {
             cargarAjaxPost("/Home/MtdEliminarRol", datos, function (data) {
                 console.log(data);
@@ -349,7 +358,7 @@
                     error(data.mensaje);
                 }
                 listarRol();
-            }); 
+            });
         });
     });
 
