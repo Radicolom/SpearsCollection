@@ -37,8 +37,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-4">
-                    <button id="btnRegistrarInsumo" type="button" class="btn btn-secondary">Registrar Compra</button>
-                    <button type="button" class="btn btn-outline-secondary" data-bs-target="#MdMaterial" data-bs-toggle="modal">Registrar Material</button>
+                    <button id="registroCompraInsumo" type="button" class="btn btn-secondary">Registrar Insumo</button>
                 </div>
                 <div class="col-4">
                     <center>
@@ -127,6 +126,16 @@
                         <label for="text" class="form-label">Nombre:</label>
                         <input type="text" class="form-control" id="nombreUsuarioDatos" placeholder="Escriba su nombre" name="nombre" disabled>
                     </div>
+                    <div class="col-8">
+                        <div class="mb-3 mt-3">
+                            <label for="text" class="form-label">Satelite:</label>
+                            <select id="btsSatelite" class="form-select" aria-label="Default select example">
+
+                                <!-- Archivo -->
+
+                            </select>
+                        </div>
+                    </div>
                     <div class="mb-3 mt-3">
                         <label for="email" class="form-label">Correo:</label>
                         <input type="email" class="form-control" id="correoUsuarioDatos" placeholder="Escriba un correo" name="correo" disabled>
@@ -157,13 +166,118 @@
 
 @* Registro *@
 
-<div class="modal fade" id="MdMaterial" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
+<div id="CntRegistrarInsumo" class="container mb-4" style="display: none;">
+    <div class="card bg-dark text-white">
+        <div class="row">
+            <div class="card-header">
+                <center>
+                    <h1>
+                        <i class="fas fa-file"></i>
+                        Registro factura
+                    </h1>
+                </center>
+            </div>
+
+            <div class="col-4">
+                <div class="card-body">
+                    <center>
+                        <label for="text" class="form-label">Foto:</label>
+                        <br>
+                        <img id="fotoActualizarAnimal" src="#" alt="Vista previa de la foto" class="rounded-circle" style="width: 200px; height: 200px;">
+                    </center>
+                    <div class="mb-3 mt-3">
+                        <label for="imagenAnimal" class="form-label">Foto:</label>
+                        <input type="file" class="form-control" id="actualizarImagenAnimal" name="imagenAnimal" accept="image/jpeg" size="65536">
+                    </div>
+                </div>
+                <center>
+                    <button id="pdfbt" type="button" class="btn-1">Descargar PDF</button>
+                </center>
+                <center>
+                    <div class="btn-group dropend" role="group">
+                        <button id="btnRegresar2" type="button" class="btn btn-info">Regresar</button>
+                        <button id="btnGuardarFactura" type="button" class="btn btn-success">Guardar</button>
+                    </div>
+                </center>
+            </div>
+            <div class="col-8">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="mb-2 mt-3 text-center">
+                                <label for="text" class="form-label">N° Compra:</label>
+                                <input type="text" class="form-control" id="txtNumeroCompra" name="txtNumeroCompra">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-2 mt-3">
+                                <label for="text" class="form-label">Estado:</label>
+                                <select id="btsEstado" class="form-select" aria-label="Default select example">
+                                    <option disabled>Seleccione una opcion</option>
+                                    <option value="0">Pendiente Pago</option>
+                                    <option value="1">Pago</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="mb-3 mt-3">
+                                <label for="text" class="form-label">Proveedor:</label>
+                                <select id="btsProveedor" class="form-select" aria-label="Default select example">
+
+                                    <!-- Archivo -->
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3 mt-3">
+                                <label for="text" class="form-label">Cantidad:</label>
+                                <input type="number" class="form-control" id="txtCantidad" name="txtCantidad">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3 mt-3">
+                                <label for="text" class="form-label">Nombre Insumo:</label>
+                                <input type="text" list="listaRegistroInsumo" name="browser" class="form-control" placeholder="Escriba el insumo" id="InsumoRegistro">
+                                <datalist id="listaRegistroInsumo">
+                                    <!-- ARCHIVO -->
+                                </datalist>
+                            </div>
+                            <div class="mb-3 mt-3">
+                                <label for="text" class="form-label">Precio Compra:</label>
+                                <input type="number" class="form-control" id="txtPrecio" name="txtPrecio">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3 mt-3">
+                                <label for="text" class="form-label">Descripción Insumo:</label>
+                                <textarea class="form-control" rows="5" name="datoDescripciónAnimal" id="datoDescripciónAnimal" disabled></textarea>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="modal fade" id="MdCompraInsumo" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-dismiss="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
                     <i class="fas fa-pen-nib"></i>
-                    Registro Material
+                    Agregar Insumo
                 </h5>
             </div>
             <div class="modal-body">
