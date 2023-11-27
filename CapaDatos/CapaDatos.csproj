@@ -47,6 +47,7 @@
     <Compile Include="ClConexion.cs" />
     <Compile Include="ClCortesD.cs" />
     <Compile Include="ClInsumoD.cs" />
+    <Compile Include="ClMaterialD.cs" />
     <Compile Include="ClRolD.cs" />
     <Compile Include="ClUsuarioD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
