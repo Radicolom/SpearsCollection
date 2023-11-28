@@ -66,7 +66,7 @@ namespace Ecommerce.Repositorio.Implementacion
             }
         }
 
-        public interface IVentaReposotorio
+        public interface IVentaRepositorio
         {
         }
     }

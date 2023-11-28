@@ -9,13 +9,16 @@ using Ecommerce.Repositorio.DBContext;
 
 namespace Ecommerce.Repositorio.Implementacion
 {
-    public class VentaRepositorio : GenericoRepositorio<VentaEcommerce>.IVentaReposotorio
+    public class VentaRepositorio : GenericoRepositorio<VentaEcommerce>,IVentaRepositorio
     {
         private readonly DbProyectoSpContext _dbContext;
-        public VentaRepositorio(DbProyectoSpContext dbContext)
+       
+        public VentaRepositorio(DbProyectoSpContext dbContext) : base(dbContext) 
+            
         {
             _dbContext = dbContext;
         }
+
         public async Task<VentaEcommerce> Registrar(VentaEcommerce modelo)
         {
             VentaEcommerce ventaGenerada = new VentaEcommerce();
