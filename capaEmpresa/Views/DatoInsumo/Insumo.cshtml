@@ -192,9 +192,15 @@
                         <br>
                         <img id="fotoActualizarAnimal" src="#" alt="Vista previa de la foto" class="rounded-circle" style="width: 200px; height: 200px;">
                     </center>
-                    <div class="mb-3 mt-3">
-                        <label for="imagenAnimal" class="form-label">Foto:</label>
-                        <input type="file" class="form-control" id="actualizarImagenAnimal" name="imagenAnimal" accept="image/jpeg" size="65536">
+                    <div class="mb-2 mt-2">
+                        <label for="text" class="form-label">Precio Compra:</label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                $
+                            </span>
+                            <input type="number" class="form-control" id="txtPrecio" name="txtPrecio">
+                        </div>
                     </div>
                 </div>
                 <center>
@@ -213,7 +219,7 @@
                         <div class="col-8">
                             <div class="mb-2 mt-2 text-center">
                                 <label for="text" class="form-label">N° Compra:</label>
-                                <input type="text" class="form-control" id="txtNumeroCompra" name="txtNumeroCompra">
+                                <input type="text" class="form-control" id="txtNumeroCompraReg" name="txtNumeroCompraReg">
                             </div>
                         </div>
                         <div class="col-4">
@@ -242,7 +248,7 @@
                         <div class="col-4">
                             <div class="mb-2 mt-2">
                                 <label for="text" class="form-label">Cantidad:</label>
-                                <input type="number" class="form-control" id="txtCantidad" name="txtCantidad">
+                                <input type="number" class="form-control" id="txtCantidadReg" name="txtCantidadReg">
                             </div>
                         </div>
 
@@ -257,14 +263,21 @@
                                 </datalist>
                             </div>
                             <div class="mb-2 mt-2">
-                                <label for="text" class="form-label">Precio Compra:</label>
-                                <input type="number" class="form-control" id="txtPrecio" name="txtPrecio">
+                                <label for="text" class="form-label">Descripción Insumo:</label>
+                                <textarea class="form-control" rows="5" name="datoDescripcionInsumo" id="datoDescripcionInsumo"></textarea>
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-2 mt-2">
-                                <label for="text" class="form-label">Descripción Insumo:</label>
-                                <textarea class="form-control" rows="5" name="datoDescripciónAnimal" id="datoDescripciónAnimal" disabled></textarea>
+                                <label for="text" class="form-label">Nombre Material:</label>
+                                <input type="text" list="listaRegistroMaterial" name="browser" class="form-control" placeholder="Escriba el material" id="MaterialRegistro">
+                                <datalist id="listaRegistroMaterial">
+                                    <!-- ARCHIVO -->
+                                </datalist>
+                            </div>
+                            <div class="mb-2 mt-2">
+                                <label for="text" class="form-label">Descripción Material:</label>
+                                <textarea class="form-control" rows="5" name="datoDescripcionMaterial" id="datoDescripcionMaterial"></textarea>
                             </div>
                         </div>
 

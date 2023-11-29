@@ -32,6 +32,7 @@ namespace CapaDatos
                                 idInsumo = Convert.ToInt32(reader["idInsumo"]),
                                 nombreInsumo = reader["nombreInsumo"].ToString(),
                                 cantidadInsumo = Convert.ToInt32(reader["cantidadInsumo"]),
+                                imagenInsumo = reader["imagenInsumo"].ToString(),
                                 descripcionInsumo = reader["descripcionInsumo"].ToString(),
                             };
 
