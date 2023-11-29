@@ -1,10 +1,6 @@
 ﻿$(function () {
 
     var todosDatos = [];
-    var cargado = 0;
-
-    var objTablaPro = null;
-    var todosLosDatos = [];
 
 
     listarInsumo();

@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DbProyectoSpContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CadenaSQL"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CadenaSQL")); 
 });
 
 
@@ -37,3 +37,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+   

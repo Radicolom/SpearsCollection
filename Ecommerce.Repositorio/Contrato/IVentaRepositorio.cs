@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Repositorio.Contrato
 {
-    public interface IVentaRepositorio : IGenericoRepositorio<Venta>
+    public interface IVentaRepositorio : IGenericoRepositorio<VentaEcommerce>
     {
-        Task<Venta> Registrar(Venta modelo);
+        Task<VentaEcommerce> Registrar(VentaEcommerce modelo);
 
     }
 }
