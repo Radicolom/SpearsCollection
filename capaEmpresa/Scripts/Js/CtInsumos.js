@@ -1,4 +1,4 @@
-﻿9$(function () {
+﻿$(function () {
 
     var todosDatos = [];
     var cargado = 0;
