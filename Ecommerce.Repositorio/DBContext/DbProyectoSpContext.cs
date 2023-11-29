@@ -9,10 +9,13 @@ public partial class DbProyectoSpContext : DbContext
 {
     public DbProyectoSpContext()
     {
+       /* base = new DbProyectoSpContext();*/
     }
-
+   
     public DbProyectoSpContext(DbContextOptions<DbProyectoSpContext> options)
         : base(options)
+        
+
     {
     }
 

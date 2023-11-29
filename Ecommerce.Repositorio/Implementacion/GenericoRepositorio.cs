@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Ecommerce.Repositorio.Contrato;
-using Ecommerce.Repostorio.DBContext;
+using Ecommerce.Repositorio.DBContext;
 
 namespace Ecommerce.Repositorio.Implementacion
 {
@@ -66,7 +66,7 @@ namespace Ecommerce.Repositorio.Implementacion
             }
         }
 
-        public interface IVentaReposotorio
+        public interface IVentaRepositorio
         {
         }
     }
