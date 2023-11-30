@@ -12,6 +12,49 @@ namespace CapaDatos
     {
         private ClConexion objConexion = new ClConexion();
 
+
+        public List<ClMaterialE> MtdListar(out string mensaje)
+        {
+            mensaje = string.Empty;
+            List<ClMaterialE> lista = new List<ClMaterialE>();
+
+            try
+            {
+                using (SqlConnection conex = objConexion.MtdAbrirConex())
+                {
+                    SqlCommand cmd = new SqlCommand("SP_Listar", conex);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@tablaSelecionada", "material");
+
+                    using(SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ClMaterialE materialDato = new ClMaterialE()
+                            {
+                                idMaterial = Convert.ToInt32(reader["idMaterial"]),
+                                nombreMaterial = reader["nombreMaterial"].ToString(),
+                                descripcionMaterial = reader["descripcionMaterial"].ToString()
+                            };
+
+                            lista.Add(materialDato);
+                        }
+                    }
+
+                }
+            }
+            catch (Exception exp)
+            {
+                mensaje = exp.ToString();
+
+                throw;
+            }finally
+            {
+                objConexion.MtdCerrarConex();
+            }
+            return lista;
+        }
+
         public int MtdGuardar(ClMaterialE material, out string mensaje)
         {
             mensaje = string.Empty;

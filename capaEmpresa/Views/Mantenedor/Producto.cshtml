@@ -4,77 +4,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="mt-5 container" id="contenedorDarAdopcion">
-    <br>
+<button class="btn btn-dark" id="btnRegProduc">Registrar Producto</button>
+
+<div class="mt-5 container" id="contenedorGuardarProducto">
     <div class="mt-5 row">
-        <div class="col-sm-5" id="listaDarAdopcion">
-            <div class="colorest card" style="width: 400px; background-color:#b46743a1;">
+        <div class="col" id="listaGuardarProducto">
+            <div class="card bg-dark text-white">
                 <div class="card-body">
                     <center>
-                        <img id="imgProducto" src="#" alt="Vista previa de la foto" class="rounded-circle" style="width: 170px; height: 170px; display: none; ">
+                        <div class="mb-2 mt-2">
+                            <img id="imgProducto" src="#" alt="Vista previa de la foto" class="rounded-circle" style="width: 170px; height: 170px; display: none; ">
+                        </div>
                     </center>
-                    <div class="mb-3 mt-3">
+                    <div class="mb-2 mt-2 text-center">
+                        <label for="text" class="form-label">Codigo del producto:</label>
+                        <input type="text" class="form-control" id="nombreCodProduc" placeholder="Escriba el codigo del producto" name="nombreCodProduc">
+                    </div>
+                    <div class="mb-2 mt-2">
                         <label for="text" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nombreAnimal" placeholder="Escriba el nombre" name="nombre">
+                        <input type="text" class="form-control" id="nombreProductoReg" placeholder="Escriba el nombre" name="nombreProductoReg">
                     </div>
-                    <div class="mb-3 mt-3">
+                    <div class="mb-2 mt-2">
                         <label for="imagenAnimal" class="form-label">Foto:</label>
-                        <input type="file" class="form-control" id="imagenAnimal" name="imagenAnimal" accept="image/jpeg image/jpg image/png">
+                        <input type="file" class="form-control" id="imagenProductoReg" name="imagenProductoReg" accept="image/jpeg image/jpg image/png">
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3 mt-3">
-                                <label for="text" class="form-label">Sexo:</label>
-                                <select class="form-select" id="selectSexo">
-                                    <!-- ARCHIVO -->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3 mt-3">
-                                <label for="text" class="form-label">Edad:</label>
-                                <select class="form-select" id="selectEdadAnimal">
-                                    <!-- ARCHIVO -->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3 mt-3">
-                                <label for="text" class="form-label">Tiempo:</label>
-                                <select class="form-select" id="selectTiempo">
-                                    <!-- ARCHIVO -->
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3 mt-3">
-                                <label for="text" class="form-label">Especie:</label>
-                                <input type="text" list="listaRegistroEspecie" name="browser" class="form-control" placeholder="Escriba la especie" id="especieRegistro">
-                                <datalist id="listaRegistroEspecie">
-                                    <!-- ARCHIVO -->
-                                </datalist>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3 mt-3">
-                                <label for="text" class="form-label">Raza:</label>
-                                <input type="text" list="listaRegistroRaza" name="browser" class="form-control" placeholder="Escriba la raza" id="razaRegistro">
-                                <datalist id="listaRegistroRaza">
-                                    <!-- ARCHIVO -->
-                                </datalist>
-                            </div>
-                        </div>
-                    </div>
-                    <label for="comment">Description:</label>
-                    <textarea class="form-control" rows="5" name="text" id="descripcionRegistrar"></textarea>
 
-                    <button type="button" class="btn btn-primary" id="btnRegistrarAnimal" value="0">Registrar peludito🙈</button>
+                    <div class="row">
+                        <!--
+                        <div class="col">
+                            <div class="mb-2 mt-2">
+                                <label for="text" class="form-label">Estado:</label>
+                                <select id="btsSatelite" class="form-select" aria-label="Default select example">
+                                    <option disabled selected>Seleccione un estado</option>
+                                    <option value='0'>Activo</option>
+                                    <option value='1'>Inactivo</option>
+                                </select>
+                            </div>
+                        </div>
+                        -->
+                        <div class="col">
+                            <div class="mb-2 mt-2">
+                                <label for="text" class="form-label">Material:</label>
+                                <input type="text" list="listaRegistroMaterial" name="browser" class="form-control" placeholder="Escriba el material" id="selectMaterialReg">
+                                <datalist id="listaRegistroMaterial">
+                                    <!-- ARCHIVO -->
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-2 mt-2">
+                                <label for="text" class="form-label">Categoria:</label>
+                                <select class="form-select" id="selectCategoriaReg">
+                                    <option value="0" disabled>Seleccione un genero</option>
+                                    <option value="1">Femenino</option>
+                                    <option value="2">Masculino</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2 mt-2">
+                        <label for="comment">Descripcion:</label>
+                        <textarea class="form-control" rows="5" name="text" id="descripcionProducRegistrar"></textarea>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" id="btnGuardarProducto">Guardar Producto</button>
                 </div>
             </div>
         </div>
-        <div class="col-sm-7">
+        <div class="col">
             <div class="row" id="darAdopcionListas">
                 <!-- ARCHIVO -->
             </div>
@@ -86,4 +83,4 @@
 
 @section scripts{
     <script src="~/Scripts/Js/CtProductos.js"></script>
-    }
+}

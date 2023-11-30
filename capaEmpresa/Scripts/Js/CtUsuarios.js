@@ -135,7 +135,7 @@
                             data.forEach(function (item) {
                                 selectRol.append("<option value=" + item.idRol + ">" + item.nombreRol + "</option>");
                             });
-                        }
+                        }   
                         break;
                     case lugar:
                         const listaRoles = $("#listaRoles");

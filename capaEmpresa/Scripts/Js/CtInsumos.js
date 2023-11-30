@@ -1,10 +1,6 @@
 ﻿$(function () {
 
     var todosDatos = [];
-    var cargado = 0;
-
-    var objTablaPro = null;
-    var todosLosDatos = [];
 
 
     listarInsumo();
@@ -52,7 +48,6 @@
     function listarInsumo() {
         cargarAjax("MtdListarInsumo/", function (data) {
             todosDatos = data;
-            console.log(data);
             if (data != null) {
                 var dataSet = [];
 
@@ -217,8 +212,22 @@
         })
     }
 
+    //lista Busqueda 
+    function ListarBusquedaInsumo() {
+        
+        todosDatos.forEach(function (item) {
+            $("#listaRegistroInsumo").append(`<option value="${ item.nombreInsumo }">`);
+        });
+    }
 
+    function ListarBusquedaMaterial() {
+        var materialesUnicos = new Set(todosDatos.map(item => item.objMaterial.nombreMaterial));
+        var listaMateriales = Array.from(materialesUnicos);
 
+        listaMateriales.forEach(function (item) {
+            $("#listaRegistroMaterial").append(`<option value="${item}">`);
+        });
+    }
 
 
 
@@ -258,13 +267,12 @@
     })
 
     $("#btnRegresar").on("click", function () {
-        console.log("sd")
         $("#CntDatosInsumo").hide();
         $("#CntInsumos").fadeIn(1000);
 
     })
+
     $("#btnRegresar2").on("click", function () {
-        console.log("sd")
         $("#CntRegistrarInsumo").hide();
         $("#CntInsumos").fadeIn(1000);
 
@@ -301,10 +309,77 @@
         $("#CntRegistrarInsumo").fadeIn(1000);
 
         await listarProveedor();
-
-
-
+        await ListarBusquedaInsumo();
+        await ListarBusquedaMaterial();
 
     })
+
+    //Cambios
+
+    $("#InsumoRegistro").on("change", function () {
+        for (var i = 0; i < todosDatos.length; i++) {
+            const item = todosDatos[i];
+            if ($("#InsumoRegistro").val() == item.nombreInsumo) {
+                $("#datoDescripcionInsumo").text(item.descripcionInsumo);
+                $("#datoDescripcionInsumo").prop("disabled", true);
+                break;
+            } else {
+                $("#datoDescripcionInsumo").prop("disabled", false);
+            }
+        }
+    });
+
+    $("#MaterialRegistro").on("change", function () {
+        for (var i = 0; i < todosDatos.length; i++) {
+            const item = todosDatos[i];
+            if ($("#MaterialRegistro").val() == item.objMaterial.nombreMaterial) {
+                $("#datoDescripcionMaterial").text(item.objMaterial.descripcionMaterial);
+                $("#datoDescripcionMaterial").prop("disabled", true);
+                break;
+            } else {
+                $("#datoDescripcionMaterial").prop("disabled", false);
+            }
+        }
+    })
+
+
+    //REGISTROS
+
+    $("#btnGuardarFactura").on("click", function () {
+
+
+        var factura = {
+            cantidadCompra: $("#txtCantidadReg").val(),
+            precioCompra: $("#txtPrecio").val(),
+            objCompra: {
+                numeroCompra: $("#txtNumeroCompraReg").val(),
+                estadoCompra: (parseInt($("#btsEstado").val()) == 0 ? true : false),
+                objProveedor: {
+                    idUsuario: $("#btsProveedor").val()
+                }
+            },
+            objInsumo: {
+                nombreInsumo: $("#InsumoRegistro").val(),
+                descripcionInsumo: $("#datoDescripcionInsumo").val(),
+                objMaterial: {
+                    nombreMaterial: $("#MaterialRegistro").val(),
+                    descripcionMaterial: $("#datoDescripcionMaterial").val()
+                }
+            }
+
+        }
+
+        console.log(factura)
+
+    });
+
+    $("#btnRegistrarEnvioSatelite").on("click", function () {
+
+        var satelite = {
+
+        }
+    })
+
+
 
 })
