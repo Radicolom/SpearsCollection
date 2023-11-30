@@ -48,7 +48,6 @@
     function listarInsumo() {
         cargarAjax("MtdListarInsumo/", function (data) {
             todosDatos = data;
-            console.log(data);
             if (data != null) {
                 var dataSet = [];
 
@@ -268,14 +267,12 @@
     })
 
     $("#btnRegresar").on("click", function () {
-        console.log("sd")
         $("#CntDatosInsumo").hide();
         $("#CntInsumos").fadeIn(1000);
 
     })
 
     $("#btnRegresar2").on("click", function () {
-        console.log("sd")
         $("#CntRegistrarInsumo").hide();
         $("#CntInsumos").fadeIn(1000);
 
@@ -376,7 +373,7 @@
 
     });
 
-    $("#").on("click", function () {
+    $("#btnRegistrarEnvioSatelite").on("click", function () {
 
         var satelite = {
 
