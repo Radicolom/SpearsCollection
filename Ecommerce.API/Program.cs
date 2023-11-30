@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Ecommerce.Repositorio.Contrato;
 using Ecommerce.Repositorio.Implementacion;
 
+using Ecommerce.Utilidades;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,6 +24,8 @@ builder.Services.AddDbContext<DbProyectoSpContext>(options =>
 
 builder.Services.AddTransient(typeof(IGenericoRepositorio<>),typeof(GenericoRepositorio<>));
 builder.Services.AddScoped<IVentaRepositorio, VentaRepositorio>();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 var app = builder.Build();
 
