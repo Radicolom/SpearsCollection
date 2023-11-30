@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaEntidad;
+using CapaNegocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,5 +25,38 @@ namespace capaEmpresa.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public JsonResult MtdListarMaterial()
+        {
+            List<ClMaterialE> lista = new ClMaterialL().MtdListar();
+            return Json(new { data = lista}, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
+
+
+        [HttpPost]
+        public JsonResult MtdGuardarProducto(ClProductoE producto, HttpPostedFileBase imagen)
+        {
+            string mensaje = string.Empty;
+            int result = 0;
+
+
+            if (producto != null)
+            {
+
+            }
+            return Json(new { data = result, mensaje = mensaje});
+        }
+    
+        
+    
+    
     }
 }
