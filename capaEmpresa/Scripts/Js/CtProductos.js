@@ -151,9 +151,12 @@
 
 
     //Vista Principal
-    $("·btnRegProduc").on("click", function () {
+    $("#btnRegProduc").on("click", function () {
         $("#contenedorGuardarProducto").fadeIn(1000);
-        cargarAjax("Mantenedor/MtdListarMaterial", function (data) {
+        cargarAjax("/Mantenedor/MtdListarMaterial", function (data) {
+            data.forEach(function (item) {
+                $("#listaRegistroMaterial").append(`<option value="${item.nombreMaterial}">`)
+            });
 
         });
 
