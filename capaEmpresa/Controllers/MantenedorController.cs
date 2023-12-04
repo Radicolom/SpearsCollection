@@ -2,6 +2,7 @@
 using CapaNegocio;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -51,6 +52,10 @@ namespace capaEmpresa.Controllers
             if (producto != null)
             {
 
+            }
+            if (imagen != null)
+            {
+                string ruta = ConfigurationManager.AppSettings["ServidorFotos"];
             }
             return Json(new { data = result, mensaje = mensaje});
         }
