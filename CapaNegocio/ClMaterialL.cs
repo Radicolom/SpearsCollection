@@ -13,6 +13,18 @@ namespace CapaNegocio
         private ClMaterialD objMaterial = new ClMaterialD();
         private string correo = "";
 
+        public List<ClMaterialE> MtdListar()
+        {
+            string mensaje = string.Empty;
+            List<ClMaterialE> lista = objMaterial.MtdListar(out mensaje);
+            if (!string.IsNullOrEmpty(mensaje))
+            {
+                ClRecursosL.MtdEnvioEmail(correo, mensaje);
+            }
+            return lista;
+        }
+
+
         public int MtdGuardar(ClMaterialE material, out string mensaje)
         {
             mensaje = string.Empty;
