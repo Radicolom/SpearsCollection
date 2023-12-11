@@ -29,7 +29,7 @@ namespace CapaNegocio
         {
             int result = 0;
             mensaje = string.Empty;
-            if (!objUsuarioE.documentoUsuario.All(char.IsDigit))
+            if (objUsuarioE.documentoUsuario != null && !objUsuarioE.documentoUsuario.All(char.IsDigit))
             {
                 mensaje = "El documento debe contener solo números";
             } 
