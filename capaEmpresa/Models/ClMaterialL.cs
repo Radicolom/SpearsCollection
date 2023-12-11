@@ -3,10 +3,9 @@ using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace CapaNegocio
+namespace capaEmpresa.Models
 {
     public class ClMaterialL
     {
@@ -36,13 +35,13 @@ namespace CapaNegocio
             else
             {
                 result = objMaterial.MtdGuardar(material, out mensaje);
-                
+
                 if (!string.IsNullOrEmpty(mensaje))
                 {
                     ClRecursosL.MtdEnvioEmail(correo, mensaje);
                 }
             }
-            
+
             return result;
 
         }

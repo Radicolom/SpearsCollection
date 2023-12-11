@@ -3,10 +3,9 @@ using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace CapaNegocio
+namespace capaEmpresa.Models
 {
     public class ClRolL
     {
@@ -31,7 +30,7 @@ namespace CapaNegocio
         {
             mensaje = string.Empty;
             int result = 0;
-            if(string.IsNullOrEmpty(objRol.nombreRol) || string.IsNullOrWhiteSpace(objRol.nombreRol))
+            if (string.IsNullOrEmpty(objRol.nombreRol) || string.IsNullOrWhiteSpace(objRol.nombreRol))
             {
                 mensaje = "El nombre no puede esta vacio o con espacios";
             }
@@ -56,17 +55,15 @@ namespace CapaNegocio
             int result = new ClRolD().MtdEliminar(objRol, out mensaje);
             if (!string.IsNullOrEmpty(mensaje))
             {
-                ClRecursosL.MtdEnvioEmail(emailY,mensaje);
+                ClRecursosL.MtdEnvioEmail(emailY, mensaje);
                 mensaje = "error al eliminar";
             }
-            if(result == 0)
+            if (result == 0)
             {
                 mensaje = "¡¡¡Ningun usuario deve tener el rol para eliminar!!!";
             }
             return result;
         }
-
-
 
 
 

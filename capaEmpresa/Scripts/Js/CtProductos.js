@@ -190,6 +190,7 @@
     });
 
     $("#btnGuardarProducto").on("click", function () {
+
         $("#imagenProductoReg")[0].files[0];
 
         var producto = {

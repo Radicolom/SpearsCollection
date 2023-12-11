@@ -3,10 +3,9 @@ using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace CapaNegocio
+namespace capaEmpresa.Models
 {
     public class ClUsuarioL
     {
@@ -32,7 +31,7 @@ namespace CapaNegocio
             if (objUsuarioE.documentoUsuario != null && !objUsuarioE.documentoUsuario.All(char.IsDigit))
             {
                 mensaje = "El documento debe contener solo números";
-            } 
+            }
             else if (string.IsNullOrEmpty(objUsuarioE.documentoUsuario) || string.IsNullOrWhiteSpace(objUsuarioE.documentoUsuario))
             {
                 mensaje = "El documento no pude ser vacio";
@@ -60,7 +59,7 @@ namespace CapaNegocio
             {
                 mensaje = "El empleado deve pertenecer a una ciudad";
             }
-            
+
             if (string.IsNullOrEmpty(mensaje))
             {
                 string pasword = string.Empty;
@@ -102,7 +101,6 @@ namespace CapaNegocio
 
             return result;
         }
-
 
     }
 }

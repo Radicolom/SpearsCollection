@@ -2,12 +2,10 @@
 using CapaEntidad;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace CapaNegocio
+namespace capaEmpresa.Models
 {
     public class ClProvedorL
     {
@@ -109,7 +107,6 @@ namespace CapaNegocio
 
             return result;
         }
-
 
     }
 }
