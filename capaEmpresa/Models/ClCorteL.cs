@@ -3,12 +3,11 @@ using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace CapaNegocio
+namespace capaEmpresa.Models
 {
-    public class ClCotrteL
+    public class ClCorteL
     {
         private ClCortesD objCorte = new ClCortesD();
         private string emailY = "";
@@ -23,7 +22,6 @@ namespace CapaNegocio
             }
             return lista;
         }
-
 
     }
 }

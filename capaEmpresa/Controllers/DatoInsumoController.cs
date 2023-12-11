@@ -1,5 +1,5 @@
-﻿using CapaEntidad;
-using CapaNegocio;
+﻿using capaEmpresa.Models;
+using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,7 +81,7 @@ namespace capaEmpresa.Controllers
         [HttpGet]
         public JsonResult MtdListarCorte()
         {
-            List<ClCorteE> lista = new ClCotrteL().MtdListar();
+            List<ClCorteE> lista = new ClCorteL().MtdListar();
             return Json(new { data = lista });
 
         }
@@ -108,7 +108,7 @@ namespace capaEmpresa.Controllers
         public JsonResult MtdListarInsumo()
         {
             string mensaje = string.Empty;
-            List<ClInsumoE> lista = new ClInsumoL().MtdListar();
+            List<ClInsumoE> lista = new ClInsumosL().MtdListar();
             return Json(new { data = lista, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
 
@@ -138,8 +138,28 @@ namespace capaEmpresa.Controllers
 
             return Json(new { data = result, mensaje = mensaje });
         }
+
+
+
+
+
+
+        //Productos
+        [HttpPost]
+        public JsonResult MtdGuardarProducto(ClProductoE objProducto)
+        {
+            string mensaje = string.Empty;
+            int result = new ClProductoL().MtdGuardarProducto();
+
+            return Json(new { data = result, mensaje = mensaje });
+        }
+
+
+
+
+
+
+
+
     }
-
-
-
 }

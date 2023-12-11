@@ -1,5 +1,5 @@
-﻿using CapaEntidad;
-using CapaNegocio;
+﻿using capaEmpresa.Models;
+using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

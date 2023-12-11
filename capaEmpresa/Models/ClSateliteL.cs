@@ -3,10 +3,9 @@ using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace CapaNegocio
+namespace capaEmpresa.Models
 {
     public class ClSateliteL
     {
@@ -18,7 +17,7 @@ namespace CapaNegocio
             string mensaje = string.Empty;
             List<ClUsuarioE> lista = objUsuario.MtdListar(out mensaje);
             List<ClUsuarioE> listaSatelite = new List<ClUsuarioE>();
-            
+
             foreach (ClUsuarioE columna in lista)
             {
                 if (string.Equals(columna.objRol.nombreRol, "Satelite", StringComparison.OrdinalIgnoreCase))
@@ -34,9 +33,6 @@ namespace CapaNegocio
             return listaSatelite;
 
         }
-
-
-
 
 
 

@@ -3,12 +3,11 @@ using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace CapaNegocio
+namespace capaEmpresa.Models
 {
-    public class ClInsumoL
+    public class ClInsumosL
     {
         private ClInsumoD objInsumo = new ClInsumoD();
         private string emailY = "";
@@ -21,11 +20,11 @@ namespace CapaNegocio
             {
                 ClRecursosL.MtdEnvioEmail(emailY, mensaje);
             }
-            
+
             return lista;
         }
 
-        public int MtdGuardar (ClInsumoE objInsumoE,out string mensaje)
+        public int MtdGuardar(ClInsumoE objInsumoE, out string mensaje)
         {
             mensaje = string.Empty;
             int resul = 0;
@@ -56,14 +55,12 @@ namespace CapaNegocio
                     resul = 0; //Actualisar
                 }
             }
-            
+
 
 
             return resul;
 
         }
-
-
 
     }
 }
