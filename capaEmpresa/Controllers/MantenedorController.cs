@@ -3,6 +3,7 @@ using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -31,7 +32,7 @@ namespace capaEmpresa.Controllers
         public JsonResult MtdListarMaterial()
         {
             List<ClMaterialE> lista = new ClMaterialL().MtdListar();
-            return Json(new { data = lista}, JsonRequestBehavior.AllowGet);
+            return Json(new { data = lista }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -43,25 +44,27 @@ namespace capaEmpresa.Controllers
 
 
         [HttpPost]
-        public JsonResult MtdGuardarProducto(ClProductoE producto, HttpPostedFileBase imagen)
+        public JsonResult MtdGuardarProducto(string objproducto2, HttpPostedFileBase imagen)
         {
-            string mensaje = string.Empty;
+            // Convierte la cadena JSON en un objeto C#
+            ClProductoE objproducto = Newtonsoft.Json.JsonConvert.DeserializeObject<ClProductoE>(objproducto2);
             int result = 0;
+            string mensaje = string.Empty;
 
-
-            if (producto != null)
+            if (objproducto != null)
             {
-
+                result = new ClProductoL().MtdGuardar(objproducto, imagen, out mensaje);               
             }
-            if (imagen != null)
+            else
             {
-                string ruta = ConfigurationManager.AppSettings["ServidorFotos"];
+                mensaje = "Los campos son obligatorios";
             }
-            return Json(new { data = result, mensaje = mensaje});
+
+            return Json(new { data = result, mensaje = mensaje });
         }
-    
-        
-    
-    
+
+
+
+
     }
 }

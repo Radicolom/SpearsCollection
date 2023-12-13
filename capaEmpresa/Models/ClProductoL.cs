@@ -1,8 +1,8 @@
 ﻿using CapaDatos;
 using CapaEntidad;
 using System;
+
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -11,50 +11,106 @@ namespace capaEmpresa.Models
 {
     public class ClProductoL
     {
-        private string _id;
         private ClProductoD objProducto = new ClProductoD();
 
-        public int MtdGuardar(ClProductoE producto, out string mensaje)
+        public int MtdGuardar(ClProductoE producto, HttpPostedFileBase imagen, out string mensaje)
         {
             mensaje = string.Empty;
             int result = 0;
 
-            try
+            if (string.IsNullOrEmpty(producto.descripcionProducto))
             {
-                if (producto.imagenProducto != null)
+                mensaje = "La descripcion no puede estar vacia";
+            }
+            if (string.IsNullOrEmpty(producto.objMaterial.nombreMaterial))
+            {
+                mensaje = "El material no puede ser nulo";
+            }
+            if (producto.idCategoria < 1 || producto.idCategoria == null)
+            {
+                mensaje = "Se deve seleccionar una categoria";
+            }
+            if (string.IsNullOrEmpty(producto.nombreProducto))
+            {
+                mensaje = "El nombre del producto no puede estar vacio";
+            }
+            if (string.IsNullOrEmpty(producto.codigoProducto))
+            {
+                mensaje = "El codigo del producto no puede ser nulo";
+            }
+
+            if (string.IsNullOrEmpty(mensaje))
+            {
+                try
                 {
-                    string rutaGuardar = ConfigurationManager.AppSettings["serviFotos"];
-                    string extension = Path.GetExtension(producto.imagenProducto);
+                    if (imagen != null)
+                    {
+                        // Obtén la ruta del directorio padre de CapaEmpresa
+                        string rutaBase = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).FullName;
 
-                    // Generar un nombre de archivo único para evitar colisiones
-                    string nombreArchivo = Guid.NewGuid().ToString() + extension;
+                        // Combina la ruta del directorio padre con la carpeta Imagen en la capa de entidad
+                        string rutaFisica = Path.Combine(rutaBase, "..", "CapaEntidad", "Imagen");
 
-                    // Combina la ruta de guardado con el nombre del archivo
-                    string rutaCompleta = Path.Combine(rutaGuardar, nombreArchivo);
+                        string extension = Path.GetExtension(imagen.FileName);
 
-                    // Guarda la imagen en la ruta especificada
-                    File.WriteAllBytes(rutaCompleta, Convert.FromBase64String(producto.imagenProducto));
+                        //// Generar un nombre de archivo único para evitar colisiones
+                        string nombreArchivo = Guid.NewGuid().ToString() + extension;
 
-                    // Almacena la ruta del archivo en tu objeto ClProductoE
-                    producto.imagenProducto = rutaCompleta;
+                        //// Combina la ruta de guardado con el nombre del archivo
+                        string rutaCompleta = Path.Combine(rutaFisica, nombreArchivo);
 
+                        //// Guarda la imagen en la ruta especificada
+                        imagen.SaveAs(rutaCompleta);
 
-                    result = 1;
+                        //// Almacena la ruta relativa del archivo en tu objeto ClProductoE
+                        producto.imagenProducto = Path.Combine("CapaEntidad", "Imagen", nombreArchivo);
+
+                        result = 1;
+                    }
+                }
+                catch (Exception exp)
+                {
+                    mensaje = exp.ToString();
+                }
+
+                if (string.IsNullOrEmpty(mensaje) && result == 1)
+                {
+                    result = objProducto.MtdGuardar(producto, out mensaje);
                 }
 
             }
-            catch (Exception exp)
+            else
             {
-                mensaje = exp.ToString();
-                throw;
+                mensaje = "El objeto producto es nulo";
             }
-            
-
-
-
             return result;
-
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
