@@ -144,17 +144,6 @@ namespace capaEmpresa.Controllers
 
 
 
-        //Productos
-        [HttpPost]
-        public JsonResult MtdGuardarProducto(ClProductoE objProducto)
-        {
-            string mensaje = string.Empty;
-            int result = new ClProductoL().MtdGuardarProducto();
-
-            return Json(new { data = result, mensaje = mensaje });
-        }
-
-
 
 
 

@@ -22,7 +22,7 @@
 
     function cargarAjaxPost(ruta, datos, tarea) {
         $.ajax({
-            url: "/DatoInsumo/" + ruta,
+            url: ruta,
             type: "POST",
             data: datos,
             dataType: "json",
@@ -38,6 +38,30 @@
             console.error(er);
             error(er);
         }).always(function () {
+            $.LoadingOverlay("hide");
+        });
+    }
+
+    function cargarAjaxPostImg(ruta, datos, tarea) {
+        jQuery.ajax({
+            url: ruta,
+            type: "POST",
+            data: datos,
+            processData: false,  
+            contentType: false  
+        }).done(function (data) {
+            if (tarea) {
+                tarea(data);
+            } else {
+                console.log("Error en la tarea AJAXPost: ");
+                tarea([]);
+            }
+        }).fail(function (er) {
+            console.error(er);
+            // Manejar errores aquí
+            tarea({ error: "Hubo un error en la solicitud." });
+        }).always(function () {
+            // Puedes realizar acciones adicionales después de la solicitud aquí
             $.LoadingOverlay("hide");
         });
     }
@@ -191,20 +215,52 @@
 
     $("#btnGuardarProducto").on("click", function () {
 
-        $("#imagenProductoReg")[0].files[0];
+        var foto = $("#imagenProductoReg")[0].files[0];
+        var imagen = URL.createObjectURL(foto);
+
+        var formData = new FormData();
+
+        formData.append("imagen", foto);
 
         var producto = {
             codigoProducto: $("#nombreCodProduc").val(),
             nombreProducto: $("#nombreProductoReg").val(),
-            descripcionProduct: $("#descripcionProducRegistrar").val(),
-            //estadoProducto: parseInt() == 0 ? false : true,
-            idMaterial: $("#selectMaterialReg").val(),
+            descripcionProducto: $("#descripcionProducRegistrar").val(),
+            objMaterial: {
+                nombreMaterial: $("#selectMaterialReg").val()
+            },
             idCategoria: $("#selectCategoriaReg").val()
+        };
 
-        }
+        const datos = JSON.stringify(producto);
+        formData.append("objproducto2", datos);
+        console.log(datos)
+        $.ajax({
+            url: "/Mantenedor/MtdGuardarProducto",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+        //cargarAjaxPost("/Mantenedor/MtdGuardarProducto", datos, function (data) {
+        //    console.log(data);
+        //});
+        
+        //cargarAjaxPostImg("/Mantenedor/MtdGuardarProducto", formData, function (data) {
+        //    console.log(data);
+        //});
+
+
+
+
 
     });
-
 
 
 

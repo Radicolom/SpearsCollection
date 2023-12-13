@@ -289,7 +289,7 @@
             descripcionMaterial: $("#txtRegDesInsumo").val()
 
         };
-        alert(registro.nombreMaterial);
+
         const datos = JSON.stringify({ objMaterial: registro });
 
         cargarAjaxPost("MtdGuardarMaterial", datos, function (dato) {
