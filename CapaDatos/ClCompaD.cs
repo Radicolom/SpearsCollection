@@ -55,7 +55,8 @@ namespace CapaDatos
                                 idCompra = Convert.ToInt32(reader["idCompra"]),
                                 numeroCompra = reader["numeroCompra"].ToString(),
                                 estadoCompra = Convert.ToBoolean(reader["estadoCompra"]),
-                                fechaCompra = reader["fechaCompra"].ToString()
+                                fechaCompra = reader["fechaCompra"].ToString(),
+                                imagenCompra = reader["imagenCompra"].ToString()
                             };
 
                             compra.objCompra.objProveedor = new ClUsuarioE()

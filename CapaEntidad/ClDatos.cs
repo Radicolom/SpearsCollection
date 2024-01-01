@@ -150,6 +150,7 @@ namespace CapaEntidad
         public string numeroCompra { get; set; }
         public bool estadoCompra { get; set; }
         public string fechaCompra { get; set; }
+        public string imagenCompra { get; set; } 
         public ClUsuarioE objProveedor { get; set; }
     }
 

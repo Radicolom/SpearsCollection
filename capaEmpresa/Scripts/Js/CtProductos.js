@@ -216,11 +216,6 @@
     $("#btnGuardarProducto").on("click", function () {
 
         var foto = $("#imagenProductoReg")[0].files[0];
-        var imagen = URL.createObjectURL(foto);
-
-        var formData = new FormData();
-
-        formData.append("imagen", foto);
 
         var producto = {
             codigoProducto: $("#nombreCodProduc").val(),
@@ -232,29 +227,16 @@
             idCategoria: $("#selectCategoriaReg").val()
         };
 
+        var formData = new FormData();
+
+        formData.append("imagen", foto);
+
         const datos = JSON.stringify(producto);
         formData.append("objproducto2", datos);
-        console.log(datos)
-        $.ajax({
-            url: "/Mantenedor/MtdGuardarProducto",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-        //cargarAjaxPost("/Mantenedor/MtdGuardarProducto", datos, function (data) {
-        //    console.log(data);
-        //});
         
-        //cargarAjaxPostImg("/Mantenedor/MtdGuardarProducto", formData, function (data) {
-        //    console.log(data);
-        //});
+        cargarAjaxPostImg("/Mantenedor/MtdGuardarProducto", formData, function (data) {
+            console.log(data);
+        });
 
 
 
