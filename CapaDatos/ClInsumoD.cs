@@ -62,7 +62,7 @@ namespace CapaDatos
 
         }
     
-        public int MtdGuardar(ClInsumoE objInsumo, out string mensaje)
+        public int MtdGuardar(ClDetalleCompraE objInsumo, out string mensaje)
         {
             mensaje = string.Empty;
             int resultado = 0;
@@ -71,12 +71,18 @@ namespace CapaDatos
             {
                 using (SqlConnection conex = objConexion.MtdAbrirConex())
                 {
-                    SqlCommand cmd = new SqlCommand("", conex);
+                    SqlCommand cmd = new SqlCommand("SP_RegistrarCompraInsumo", conex);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("", objInsumo.nombreInsumo);
-                    cmd.Parameters.AddWithValue("", objInsumo.cantidadInsumo);
-                    cmd.Parameters.AddWithValue("", objInsumo.descripcionInsumo);
-                    cmd.Parameters.AddWithValue("", objInsumo.objMaterial.idMaterial);
+                    cmd.Parameters.AddWithValue("@cantidadCompra", objInsumo.cantidadCompra);
+                    cmd.Parameters.AddWithValue("@precioCompra", objInsumo.precioCompra);
+                    cmd.Parameters.AddWithValue("@numeroCompra", objInsumo.objCompra.numeroCompra);
+                    cmd.Parameters.AddWithValue("@estadoCompra", objInsumo.objCompra.estadoCompra);
+                    cmd.Parameters.AddWithValue("@idProveedor", objInsumo.objCompra.objProveedor.idUsuario);
+                    cmd.Parameters.AddWithValue("@nombreInsumo", objInsumo.objInsumo.nombreInsumo);
+                    cmd.Parameters.AddWithValue("@descripcionInsumo", objInsumo.objInsumo.descripcionInsumo);
+                    cmd.Parameters.AddWithValue("@nombreMaterial", objInsumo.objInsumo.objMaterial.nombreMaterial);
+                    cmd.Parameters.AddWithValue("@descripcionMaterial", objInsumo.objInsumo.objMaterial.descripcionMaterial);
+                    cmd.Parameters.AddWithValue("@imagenInsumo", objInsumo.objInsumo.imagenInsumo);
 
                     resultado = cmd.ExecuteNonQuery();
                 }

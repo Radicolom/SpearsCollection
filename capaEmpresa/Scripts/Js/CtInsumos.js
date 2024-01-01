@@ -45,6 +45,30 @@
         });
     }
 
+    function cargarAjaxPostImg(ruta, datos, tarea) {
+        jQuery.ajax({
+            url: ruta,
+            type: "POST",
+            data: datos,
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            if (tarea) {
+                tarea(data);
+            } else {
+                console.log("Error en la tarea AJAXPost: ");
+                tarea([]);
+            }
+        }).fail(function (er) {
+            console.error(er);
+            // Manejar errores aquí
+            tarea({ error: "Hubo un error en la solicitud." });
+        }).always(function () {
+            // Puedes realizar acciones adicionales después de la solicitud aquí
+            $.LoadingOverlay("hide");
+        });
+    }
+
     function listarInsumo() {
         cargarAjax("MtdListarInsumo/", function (data) {
             todosDatos = data;
@@ -342,11 +366,23 @@
         }
     })
 
+    $("#imagenInsumoReg").on("change", function () {
+        var foto = this.files[0];
+        if (foto.type !== "image/jpeg") {
+            error("Formato incorrecto");
+            $("#fotoInsumoReg").hide();
+            $("#imagenInsumoReg").val("");
+        } else {
+            var urlImagen = URL.createObjectURL(foto);
+            $("#fotoInsumoReg").attr("src", urlImagen).show()
+        }
+    })
 
     //REGISTROS
 
     $("#btnGuardarFactura").on("click", function () {
 
+        var foto = $("#imagenInsumoReg")[0].files[0];
 
         var factura = {
             cantidadCompra: $("#txtCantidadReg").val(),
@@ -369,7 +405,16 @@
 
         }
 
-        console.log(factura)
+        var formData = new FormData;
+
+        formData.append("imagen", foto);
+
+        const datos = JSON.stringify(factura);
+        formData.append("objInsumo2", datos);
+
+        cargarAjaxPostImg("/DatoInsumo/MtdGuardarInsumo", formData, function (data) {
+            console.log(data);
+        });
 
     });
 

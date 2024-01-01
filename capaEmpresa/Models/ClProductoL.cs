@@ -54,7 +54,7 @@ namespace capaEmpresa.Models
                         string extension = Path.GetExtension(imagen.FileName);
 
                         //// Generar un nombre de archivo único para evitar colisiones
-                        string nombreArchivo = Guid.NewGuid().ToString() + extension;
+                        string nombreArchivo = "Producto" + Guid.NewGuid().ToString() + extension;
 
                         //// Combina la ruta de guardado con el nombre del archivo
                         string rutaCompleta = Path.Combine(rutaFisica, nombreArchivo);

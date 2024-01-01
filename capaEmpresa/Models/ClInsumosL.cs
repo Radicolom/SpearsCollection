@@ -2,6 +2,7 @@
 using CapaEntidad;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -24,31 +25,54 @@ namespace capaEmpresa.Models
             return lista;
         }
 
-        public int MtdGuardar(ClInsumoE objInsumoE, out string mensaje)
+		public int MtdGuardar(ClDetalleCompraE objInsumoE, HttpPostedFileBase imagen, out string mensaje)
         {
             mensaje = string.Empty;
             int resul = 0;
-            if (string.IsNullOrEmpty(objInsumoE.nombreInsumo) || string.IsNullOrWhiteSpace(objInsumoE.nombreInsumo))
+            if (string.IsNullOrEmpty(objInsumoE.objInsumo.nombreInsumo) || string.IsNullOrWhiteSpace(objInsumoE.objInsumo.nombreInsumo))
             {
                 mensaje = "El nombre no puede ser vacio";
             }
-            if (objInsumoE.objMaterial.idMaterial == null || objInsumoE.objMaterial.idMaterial < 1)
+            if (string.IsNullOrEmpty(objInsumoE.objInsumo.objMaterial.nombreMaterial) && objInsumoE.objInsumo.objMaterial.idMaterial < 1)
             {
-                if (!string.IsNullOrEmpty(objInsumoE.objMaterial.nombreMaterial) && !string.IsNullOrWhiteSpace(objInsumoE.objMaterial.nombreMaterial))
-                {
-                    //REGISTRO MATERIAL
-                }
-                else
-                {
                     mensaje = "El material no puede ser nulo";
-                }
             }
 
             if (string.IsNullOrEmpty(mensaje))
             {
-                if (objInsumoE.idInsumo == null || objInsumoE.idInsumo == 0)
+                if (objInsumoE.objInsumo.idInsumo == null || objInsumoE.objInsumo.idInsumo == 0)
                 {
-                    resul = objInsumo.MtdGuardar(objInsumoE, out mensaje);
+					try
+					{
+						if (imagen != null)
+						{
+							// Obtén la ruta del directorio padre de CapaEmpresa
+							string rutaBase = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).FullName;
+
+							// Combina la ruta del directorio padre con la carpeta Imagen en la capa de entidad
+							string rutaFisica = Path.Combine(rutaBase, "..", "CapaEntidad", "Imagen");
+
+							string extension = Path.GetExtension(imagen.FileName);
+
+							//// Generar un nombre de archivo único para evitar colisiones
+							string nombreArchivo = "Insumo" + Guid.NewGuid().ToString() + extension;
+
+							//// Combina la ruta de guardado con el nombre del archivo
+							string rutaCompleta = Path.Combine(rutaFisica, nombreArchivo);
+
+							//// Guarda la imagen en la ruta especificada
+							imagen.SaveAs(rutaCompleta);
+
+							//// Almacena la ruta relativa del archivo en tu objeto ClProductoE
+							objInsumoE.objInsumo.imagenInsumo = Path.Combine("CapaEntidad", "Imagen", nombreArchivo);
+
+							resul = objInsumo.MtdGuardar(objInsumoE, out mensaje);
+						}
+					}
+					catch (Exception exp)
+					{
+						mensaje = exp.ToString();
+					}
                 }
                 else
                 {
