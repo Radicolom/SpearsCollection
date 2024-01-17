@@ -150,7 +150,7 @@ namespace Ecommerce.API.Controllers
         }
 
 
-        [HttpDelete("Eliminar")]
+        [HttpDelete("Eliminar/{id:int}")]
 
         public async Task<IActionResult> Eliminar(int id)
         {
