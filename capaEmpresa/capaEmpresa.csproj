@@ -117,6 +117,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClCiudadL.cs" />
+    <Compile Include="Models\ClCompraL.cs" />
+    <Compile Include="Models\ClCorteL.cs" />
+    <Compile Include="Models\ClInsumosL.cs" />
+    <Compile Include="Models\ClMaterialL.cs" />
+    <Compile Include="Models\ClProductoL.cs" />
+    <Compile Include="Models\ClProvedorL.cs" />
+    <Compile Include="Models\ClRecursosL.cs" />
+    <Compile Include="Models\ClRolL.cs" />
+    <Compile Include="Models\ClSateliteL.cs" />
+    <Compile Include="Models\ClUsuarioL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -486,7 +497,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-utilities.css.map" />
@@ -503,13 +513,13 @@
     <Content Include="Scripts\jquery-3.7.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
+      <Project>{88d1c6c3-cf41-4417-9c7e-0c4187012a67}</Project>
+      <Name>CapaDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CapaEntidad\CapaEntidad.csproj">
       <Project>{22e675b6-6d4c-4e8e-9060-4e96fa2f8b66}</Project>
       <Name>CapaEntidad</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CapaNegocio\CapaNegocio.csproj">
-      <Project>{6f7a3975-7841-49fc-bffa-000ed6c05d30}</Project>
-      <Name>CapaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

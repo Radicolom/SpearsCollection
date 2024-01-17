@@ -22,7 +22,7 @@
 
     function cargarAjaxPost(ruta, datos, tarea) {
         $.ajax({
-            url: "/DatoInsumo/" + ruta,
+            url: ruta,
             type: "POST",
             data: datos,
             dataType: "json",
@@ -38,6 +38,30 @@
             console.error(er);
             error(er);
         }).always(function () {
+            $.LoadingOverlay("hide");
+        });
+    }
+
+    function cargarAjaxPostImg(ruta, datos, tarea) {
+        jQuery.ajax({
+            url: ruta,
+            type: "POST",
+            data: datos,
+            processData: false,  
+            contentType: false  
+        }).done(function (data) {
+            if (tarea) {
+                tarea(data);
+            } else {
+                console.log("Error en la tarea AJAXPost: ");
+                tarea([]);
+            }
+        }).fail(function (er) {
+            console.error(er);
+            // Manejar errores aquí
+            tarea({ error: "Hubo un error en la solicitud." });
+        }).always(function () {
+            // Puedes realizar acciones adicionales después de la solicitud aquí
             $.LoadingOverlay("hide");
         });
     }
@@ -151,9 +175,12 @@
 
 
     //Vista Principal
-    $("·btnRegProduc").on("click", function () {
+    $("#btnRegProduc").on("click", function () {
         $("#contenedorGuardarProducto").fadeIn(1000);
-        cargarAjax("Mantenedor/MtdListarMaterial", function (data) {
+        cargarAjax("/Mantenedor/MtdListarMaterial", function (data) {
+            data.forEach(function (item) {
+                $("#listaRegistroMaterial").append(`<option value="${item.nombreMaterial}">`)
+            });
 
         });
 
@@ -187,20 +214,35 @@
     });
 
     $("#btnGuardarProducto").on("click", function () {
-        $("#imagenProductoReg")[0].files[0];
+
+        var foto = $("#imagenProductoReg")[0].files[0];
 
         var producto = {
             codigoProducto: $("#nombreCodProduc").val(),
             nombreProducto: $("#nombreProductoReg").val(),
-            descripcionProduct: $("#descripcionProducRegistrar").val(),
-            //estadoProducto: parseInt() == 0 ? false : true,
-            idMaterial: $("#selectMaterialReg").val(),
+            descripcionProducto: $("#descripcionProducRegistrar").val(),
+            objMaterial: {
+                nombreMaterial: $("#selectMaterialReg").val()
+            },
             idCategoria: $("#selectCategoriaReg").val()
+        };
 
-        }
+        var formData = new FormData();
+
+        formData.append("imagen", foto);
+
+        const datos = JSON.stringify(producto);
+        formData.append("objproducto2", datos);
+        
+        cargarAjaxPostImg("/Mantenedor/MtdGuardarProducto", formData, function (data) {
+            console.log(data);
+        });
+
+
+
+
 
     });
-
 
 
 

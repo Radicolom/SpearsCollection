@@ -1,5 +1,5 @@
-﻿using CapaEntidad;
-using CapaNegocio;
+﻿using capaEmpresa.Models;
+using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,7 +81,7 @@ namespace capaEmpresa.Controllers
         [HttpGet]
         public JsonResult MtdListarCorte()
         {
-            List<ClCorteE> lista = new ClCotrteL().MtdListar();
+            List<ClCorteE> lista = new ClCorteL().MtdListar();
             return Json(new { data = lista });
 
         }
@@ -108,18 +108,19 @@ namespace capaEmpresa.Controllers
         public JsonResult MtdListarInsumo()
         {
             string mensaje = string.Empty;
-            List<ClInsumoE> lista = new ClInsumoL().MtdListar();
+            List<ClInsumoE> lista = new ClInsumosL().MtdListar();
             return Json(new { data = lista, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpPost]
-        //public JsonResult MtdGuardarInsumo(ClInsumoE objInsumo)
-        //{
-        //    string mensaje = string.Empty;
-        //    int result = 0;
+        [HttpPost]
+        public JsonResult MtdGuardarInsumo(string objInsumo2, HttpPostedFileBase imagen)
+        {
+			ClDetalleCompraE objInsumo = Newtonsoft.Json.JsonConvert.DeserializeObject<ClDetalleCompraE>(objInsumo2);
+			string mensaje = string.Empty;
+            int result = new ClInsumosL().MtdGuardar(objInsumo, imagen, out mensaje);
 
-        //    return Json(new { data = result, mensaje = mensaje });
-        //}
+            return Json(new { data = result, mensaje = mensaje });
+        }
 
         //[HttpPost]
         //public JsonResult MtdEliminarInsumos(ClInsumoE objInsumo)
@@ -138,8 +139,17 @@ namespace capaEmpresa.Controllers
 
             return Json(new { data = result, mensaje = mensaje });
         }
+
+
+
+
+
+
+
+
+
+
+
+
     }
-
-
-
 }
