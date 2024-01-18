@@ -20,7 +20,7 @@ namespace Ecommerce.API.Controllers
         }
 
 
-        [HttpGet("Lista/{buscar:alpha?}")]
+        [HttpGet("Lista/{buscar?}")]
 
         public async Task<IActionResult> Lista(string buscar = "NA")
         {
