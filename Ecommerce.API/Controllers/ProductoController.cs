@@ -46,7 +46,7 @@ namespace Ecommerce.API.Controllers
 
 
 
-        [HttpGet("Catalogo/{categoria:alpha}/{buscar:alpha?}")]
+        [HttpGet("Catalogo/{categoria}/{buscar?}")]
 
         public async Task<IActionResult> Catalogo(string categoria,string buscar = "NA")
         {
