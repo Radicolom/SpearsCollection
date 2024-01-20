@@ -5,6 +5,8 @@
 @inject IToastService toastService
 @inject NavigationManager _navServicio
 
+@using Microsoft.AspNetCore.Components.Authorization;
+@using System.Security.Claims;
 
 <div class="row mt-4">
 
@@ -148,9 +150,18 @@
     private decimal? TotalPagar = 0;
     private TarjetaDTO tarjeta = new TarjetaDTO();
 
+    [CascadingParameter]
+    private Task<AuthenticationState>authenticationState{ get; set; }
+
+
+
     protected override async Task OnInitializedAsync()
     {
         lista = await carritoServicio.DevolverCarrito();
+
+        var authState = await authenticationState;
+        if(authState.User.Identity.IsAuthenticated)
+            disabled = false;
     }
 
     private void Disminuir(int Id)
@@ -205,9 +216,14 @@
             });
         }
 
+        var authState = await authenticationState;
+
+        var IdUsuarioE = authState.User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).Single();
+
+
         VentaEcommerceDTO modelo = new VentaEcommerceDTO()
             {
-                IdUsuarioE = 1,
+                IdUsuarioE = Convert.ToInt32(IdUsuarioE),
                 Total = lista.Sum(i => i.Total),
                 DetalleVentaEcommerces = detalle
             };
