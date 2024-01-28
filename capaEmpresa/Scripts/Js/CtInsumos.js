@@ -91,11 +91,16 @@
                 data.forEach(listarCartas);
 
                 function listarCartas(item, index) {
+                    console.log(item);
+                    var base64Image = btoa(String.fromCharCode.apply(null, item.imagenBytes));
+
                     dataSet.push([
                         '<div class="col" compM="' + item.objMaterial.idMaterial +
                         '"><button id="btnInsumo" type="button" class="btn" data-indice="' + index + '"' +
                         '><div class="colorest card" style="width: 250px; background-color:#ffc273;">' +
-                        
+                        '<div class="card-title">' +
+                        '<img src="data:image/jpeg;base64,' + base64Image + '" alt="ImgInsumo" style="width: 150px; height: auto;">' + 
+                        '</div>' +
                         '<div class="card-body">' +
                         '<h5><strong>Nombre:</strong> ' + item.nombreInsumo + '</h5>' +
                         '<h5><strong>Material:</strong> ' + item.objMaterial.nombreMaterial + '</h5>' +
@@ -156,7 +161,6 @@
                 popup: 'bg-dark text-white',
                 content: 'text-white',
                 title: 'text-white'
-                // Puedes agregar más clases según sea necesario
             }
         });
     }
@@ -274,7 +278,7 @@
     //datos
 
     $("#CartasInsumo").on("click", "#btnInsumo", async function () {
-        
+
         // Obtener la posición del botón en relación con sus elementos hermanos
         var posicion = $(this).data('indice');
         var datos = todosDatos[posicion];
@@ -282,6 +286,11 @@
         $("#CntDatosInsumo").fadeIn(1000);
         await listarSatelite();
 
+        var base64 = btoa(String.fromCharCode.apply(null, datos.imagenBytes));
+
+        console.log(base64)
+
+        $("#fotInsumo").attr("src", 'data: image / jpeg; base64, ' + base64);
         $("#txtNombre").val(datos.nombreInsumo);
         $("#txtMaterial").val(datos.objMaterial.nombreMaterial);
         $("#txtCantidad").val(datos.cantidadInsumo);
@@ -413,7 +422,14 @@
         formData.append("objInsumo2", datos);
 
         cargarAjaxPostImg("/DatoInsumo/MtdGuardarInsumo", formData, function (data) {
-            console.log(data);
+            if (data.mensaje != null) {
+                guardado();
+                $("#CntDatosInsumo").hide();
+                $("#CntInsumos").fadeIn(1000);
+            } else {
+                error(data.mensaje)
+            }
+            
         });
 
     });

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,22 @@ namespace CapaDatos
                                 descripcionMaterial = reader["descripcionMaterial"].ToString()
                             };
 
-                            lista.Add(insumo);
+							// Cargar la imagen desde la ruta almacenada
+							if (!string.IsNullOrEmpty(insumo.imagenInsumo))
+							{
+								// Obtener la ruta física completa de la imagen
+								string rutaCompletaImagen = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"..", insumo.imagenInsumo);
+
+								// Verificar si el archivo existe
+								if (File.Exists(rutaCompletaImagen))
+								{
+									// Leer la imagen como un arreglo de bytes y asignarla al objeto insumo
+									byte[] imagenBytes = File.ReadAllBytes(rutaCompletaImagen);
+									insumo.imagenBytes = imagenBytes; // Puedes agregar un atributo imagenBytes en tu clase ClInsumoE
+								}
+							}
+
+							lista.Add(insumo);
                         }
                     }
 
